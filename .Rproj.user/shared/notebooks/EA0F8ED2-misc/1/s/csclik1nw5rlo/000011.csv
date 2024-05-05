@@ -1,0 +1,4 @@
+"0","ggplot(survey.sub, aes(x=Pulse,y=Height,color=Smoke,shape=Exer))+"
+"0","  geom_point(alpha=0.5,size=3)+"
+"0","  scale_color_manual(values=wes_palette(""GrandBudapest1""))+"
+"0","  ggtitle(""Pulse Rate by Demographic"")"

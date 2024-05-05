@@ -1,0 +1,102 @@
+---
+title: "High School and Beyond Survey Visualizations"
+description: |
+  A collection of visualizations based on the HS&B survey (from MATH230 Exam 1)
+---
+```{r,echo=FALSE}
+hsb2=read.csv("hsb2.csv")
+hsb2$gender=factor(hsb2$gender)
+hsb2$race=factor(hsb2$race)
+hsb2$ses=factor(hsb2$ses,labels=c("low","middle","high"))
+hsb2$total_score=hsb2$read+hsb2$write+hsb2$math+hsb2$science+hsb2$socst
+hsb2$cut_total_score=cut(hsb2$total_score,
+breaks=quantile(hsb2$total_score,probs=seq(0,1,0.25)),                                    labels=c("first","second","third","fourth"))
+attach(hsb2)
+library(ggplot2)
+library(ggridges)
+```
+This dataset includes demographical and testing information about high school seniors. Below are a series of visualizations meant to explain this data.
+
+### Cumulative Test Score Distribution
+This boxplot shows the distribution of cumulative test scores for all students.
+
+```{r,echo=FALSE}
+ggplot(hsb2,aes(x=total_score))+
+  geom_boxplot(width=0.5,fill="steelblue")+
+  xlab("Cumulative Score Across All Subjects")+
+  ggtitle("Distribution of Cumulative Subject Scores")
+```
+### Writing Score Distribution by School Type
+This visualization uses an overlay of violin and boxplots to show the distribution of writing test scores based on type of school.
+
+```{r,echo=FALSE}
+ggplot(hsb2, aes(x=schtyp,y=write))+
+  geom_violin(aes(fill=schtyp),alpha=0.5)+
+  guides(fill="none")+
+  xlab("School Type")+
+  ylab("Writing Scores")+
+  ggtitle("Distribution of writing scores by school type")+
+  geom_boxplot(width=0.25,aes(fill=schtyp))
+```
+### Test Score Quartile by Race
+This stacked bar chart shows a breakdown of each race group by which quartile they fall in based on their cumulative test score.
+
+```{r,echo=FALSE}
+ggplot(hsb2, aes(x=race,fill=cut_total_score))+
+  geom_bar(position="fill")+
+  xlab("Student's Race")+
+  ylab("Proportion of Students by Score Quartile")+
+  guides(title="Score Quartile")+
+  scale_color_discrete("Cumulative Score Quartile")+
+  ggtitle("Proportion of Cumulative Test Score Quartile by Race")
+```
+### Reading Scores vs Writing Score
+This scatterplot organized by color/shape shows the correlation between students reading and writing test scores.
+
+```{r,echo=FALSE}
+ggplot(hsb2, aes(x=read,y=write))+
+  geom_point(aes(color=gender,shape=gender))+
+  xlab("Reading Score")+
+  ylab("Writing Score")+
+  ggtitle("Comparing reading score and writing score")
+```
+### Test Score Distributions and Race
+Using density cuvres, points and bars to show quartiles, this viz compares cumulative test scores by race.
+
+```{r,echo=FALSE}
+ggplot(hsb2,aes(x=total_score,y=race))+
+    geom_density_ridges(
+      jittered_points=TRUE, quantile_lines=TRUE,scale=0.7,alpha=0.7,
+      vline_width=1,vline_color="blue", point_size=0.4,point_alpha=1,
+      position = position_raincloud(adjust_vlines = TRUE))+
+  xlab("Total standardized test score")+
+  ylab("Student's Race")+
+  ggtitle("Comparing distributions of test scores by race")+
+  scale_y_discrete(guide=guide_axis(angle=45))
+```
+### Socioeconomic Status Test scores by Subject
+This chart uses different linetypes and point shapes to show how socioecenomic status effects test scores across all subjects.
+
+```{r,echo=FALSE}
+ses.low = c(mean(read[ses == "low"]), mean(write[ses == "low"]), mean(math[ses == "low"]), mean(science[ses == "low"]), mean(socst[ses == "low"]))
+ses.middle = c(mean(read[ses == "middle"]), mean(write[ses == "middle"]), mean(math[ses == "middle"]), mean(science[ses == "middle"]), mean(socst[ses == "middle"]))
+ses.high = c(mean(read[ses == "high"]), mean(write[ses == "high"]), mean(math[ses == "high"]), mean(science[ses == "high"]), mean(socst[ses == "high"]))
+ses.rep = factor(rep(levels(ses), each = 5), levels = c("low", "middle", "high"), ordered = TRUE)
+subject.rep = rep(c("reading", "writing", "math", "science", "social studies"), times = 3)
+scores = c(ses.low, ses.middle, ses.high)
+
+new.df = data.frame(ses.rep, subject.rep, scores)
+
+
+ggplot(new.df, aes(x = scores, y = ses.rep, group = subject.rep)) + 
+  geom_point(aes(color = subject.rep,shape=subject.rep,size=0.1)) + 
+  geom_line(aes(color = subject.rep,linetype=subject.rep))+
+  xlab("Test Scores")+
+  ylab("Socioeconomic Status")+
+  ggtitle("Test scores by subject and socioeconomic class")+
+  labs(alt="A line chart with points showing average test scores by subject 
+       compared with the student's socioeconomic status. 
+       Universally, without exception, the average test scores 
+       for all subjects increase with socioeconomic class.")
+```
+NOTE: Something seems to have not worked when copying this one, not sure why or how.

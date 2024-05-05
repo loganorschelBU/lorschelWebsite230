@@ -1,0 +1,2611 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+  <meta name="generator" content="distill" />
+
+  <style type="text/css">
+  /* Hide doc at startup (prevent jankiness while JS renders/transforms) */
+  body {
+    visibility: hidden;
+  }
+  </style>
+
+ <!--radix_placeholder_import_source-->
+ <!--/radix_placeholder_import_source-->
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  { color: #00769e; background-color: #f1f3f5; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span { color: #00769e; } /* Normal */
+code span.al { color: #ad0000; } /* Alert */
+code span.an { color: #5e5e5e; } /* Annotation */
+code span.at { color: #657422; } /* Attribute */
+code span.bn { color: #ad0000; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #00769e; } /* ControlFlow */
+code span.ch { color: #20794d; } /* Char */
+code span.cn { color: #8f5902; } /* Constant */
+code span.co { color: #5e5e5e; } /* Comment */
+code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+code span.dt { color: #ad0000; } /* DataType */
+code span.dv { color: #ad0000; } /* DecVal */
+code span.er { color: #ad0000; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #ad0000; } /* Float */
+code span.fu { color: #4758ab; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #5e5e5e; } /* Information */
+code span.kw { color: #00769e; } /* Keyword */
+code span.op { color: #5e5e5e; } /* Operator */
+code span.ot { color: #00769e; } /* Other */
+code span.pp { color: #ad0000; } /* Preprocessor */
+code span.sc { color: #5e5e5e; } /* SpecialChar */
+code span.ss { color: #20794d; } /* SpecialString */
+code span.st { color: #20794d; } /* String */
+code span.va { color: #111111; } /* Variable */
+code span.vs { color: #20794d; } /* VerbatimString */
+code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+</style>
+
+
+  <!--radix_placeholder_meta_tags-->
+  <title>Math 230: Data Visualization and Computing: Understanding Price</title>
+
+  <meta property="description" itemprop="description" content="An exploration of both new and used car sales in the United States"/>
+
+
+
+  <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
+  <meta property="og:title" content="Math 230: Data Visualization and Computing: Understanding Price"/>
+  <meta property="og:type" content="article"/>
+  <meta property="og:description" content="An exploration of both new and used car sales in the United States"/>
+  <meta property="og:locale" content="en_US"/>
+  <meta property="og:site_name" content="Math 230: Data Visualization and Computing"/>
+
+  <!--  https://dev.twitter.com/cards/types/summary -->
+  <meta property="twitter:card" content="summary"/>
+  <meta property="twitter:title" content="Math 230: Data Visualization and Computing: Understanding Price"/>
+  <meta property="twitter:description" content="An exploration of both new and used car sales in the United States"/>
+
+  <!--/radix_placeholder_meta_tags-->
+  <!--radix_placeholder_rmarkdown_metadata-->
+
+  <script type="text/json" id="radix-rmarkdown-metadata">
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description"]}},"value":[{"type":"character","attributes":{},"value":["Understanding Price"]},{"type":"character","attributes":{},"value":["An exploration of both new and used car sales in the United States"]}]}
+  </script>
+  <!--/radix_placeholder_rmarkdown_metadata-->
+  <!--radix_placeholder_navigation_in_header-->
+  <meta name="distill:offset" content=""/>
+
+  <script type="application/javascript">
+
+    window.headroom_prevent_pin = false;
+
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+
+      // initialize headroom for banner
+      var header = $('header').get(0);
+      var headerHeight = header.offsetHeight;
+      var headroom = new Headroom(header, {
+        tolerance: 5,
+        onPin : function() {
+          if (window.headroom_prevent_pin) {
+            window.headroom_prevent_pin = false;
+            headroom.unpin();
+          }
+        }
+      });
+      headroom.init();
+      if(window.location.hash)
+        headroom.unpin();
+      $(header).addClass('headroom--transition');
+
+      // offset scroll location for banner on hash change
+      // (see: https://github.com/WickyNilliams/headroom.js/issues/38)
+      window.addEventListener("hashchange", function(event) {
+        window.scrollTo(0, window.pageYOffset - (headerHeight + 25));
+      });
+
+      // responsive menu
+      $('.distill-site-header').each(function(i, val) {
+        var topnav = $(this);
+        var toggle = topnav.find('.nav-toggle');
+        toggle.on('click', function() {
+          topnav.toggleClass('responsive');
+        });
+      });
+
+      // nav dropdowns
+      $('.nav-dropbtn').click(function(e) {
+        $(this).next('.nav-dropdown-content').toggleClass('nav-dropdown-active');
+        $(this).parent().siblings('.nav-dropdown')
+           .children('.nav-dropdown-content').removeClass('nav-dropdown-active');
+      });
+      $("body").click(function(e){
+        $('.nav-dropdown-content').removeClass('nav-dropdown-active');
+      });
+      $(".nav-dropdown").click(function(e){
+        e.stopPropagation();
+      });
+    });
+  </script>
+
+  <style type="text/css">
+
+  /* Theme (user-documented overrideables for nav appearance) */
+
+  .distill-site-nav {
+    color: rgba(255, 255, 255, 0.8);
+    background-color: #0F2E3D;
+    font-size: 15px;
+    font-weight: 300;
+  }
+
+  .distill-site-nav a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .distill-site-nav a:hover {
+    color: white;
+  }
+
+  @media print {
+    .distill-site-nav {
+      display: none;
+    }
+  }
+
+  .distill-site-header {
+
+  }
+
+  .distill-site-footer {
+
+  }
+
+
+  /* Site Header */
+
+  .distill-site-header {
+    width: 100%;
+    box-sizing: border-box;
+    z-index: 3;
+  }
+
+  .distill-site-header .nav-left {
+    display: inline-block;
+    margin-left: 8px;
+  }
+
+  @media screen and (max-width: 768px) {
+    .distill-site-header .nav-left {
+      margin-left: 0;
+    }
+  }
+
+
+  .distill-site-header .nav-right {
+    float: right;
+    margin-right: 8px;
+  }
+
+  .distill-site-header a,
+  .distill-site-header .title {
+    display: inline-block;
+    text-align: center;
+    padding: 14px 10px 14px 10px;
+  }
+
+  .distill-site-header .title {
+    font-size: 18px;
+    min-width: 150px;
+  }
+
+  .distill-site-header .logo {
+    padding: 0;
+  }
+
+  .distill-site-header .logo img {
+    display: none;
+    max-height: 20px;
+    width: auto;
+    margin-bottom: -4px;
+  }
+
+  .distill-site-header .nav-image img {
+    max-height: 18px;
+    width: auto;
+    display: inline-block;
+    margin-bottom: -3px;
+  }
+
+
+
+  @media screen and (min-width: 1000px) {
+    .distill-site-header .logo img {
+      display: inline-block;
+    }
+    .distill-site-header .nav-left {
+      margin-left: 20px;
+    }
+    .distill-site-header .nav-right {
+      margin-right: 20px;
+    }
+    .distill-site-header .title {
+      padding-left: 12px;
+    }
+  }
+
+
+  .distill-site-header .nav-toggle {
+    display: none;
+  }
+
+  .nav-dropdown {
+    display: inline-block;
+    position: relative;
+  }
+
+  .nav-dropdown .nav-dropbtn {
+    border: none;
+    outline: none;
+    color: rgba(255, 255, 255, 0.8);
+    padding: 16px 10px;
+    background-color: transparent;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    margin: 0;
+    margin-top: 1px;
+    z-index: 2;
+  }
+
+  .nav-dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 200px;
+    border: 1px solid rgba(0,0,0,0.15);
+    border-radius: 4px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1);
+    z-index: 1;
+    margin-top: 2px;
+    white-space: nowrap;
+    padding-top: 4px;
+    padding-bottom: 4px;
+  }
+
+  .nav-dropdown-content hr {
+    margin-top: 4px;
+    margin-bottom: 4px;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .nav-dropdown-active {
+    display: block;
+  }
+
+  .nav-dropdown-content a, .nav-dropdown-content .nav-dropdown-header {
+    color: black;
+    padding: 6px 24px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+  }
+
+  .nav-dropdown-content .nav-dropdown-header {
+    display: block;
+    padding: 5px 24px;
+    padding-bottom: 0;
+    text-transform: uppercase;
+    font-size: 14px;
+    color: #999999;
+    white-space: nowrap;
+  }
+
+  .nav-dropdown:hover .nav-dropbtn {
+    color: white;
+  }
+
+  .nav-dropdown-content a:hover {
+    background-color: #ddd;
+    color: black;
+  }
+
+  .nav-right .nav-dropdown-content {
+    margin-left: -45%;
+    right: 0;
+  }
+
+  @media screen and (max-width: 768px) {
+    .distill-site-header a, .distill-site-header .nav-dropdown  {display: none;}
+    .distill-site-header a.nav-toggle {
+      float: right;
+      display: block;
+    }
+    .distill-site-header .title {
+      margin-left: 0;
+    }
+    .distill-site-header .nav-right {
+      margin-right: 0;
+    }
+    .distill-site-header {
+      overflow: hidden;
+    }
+    .nav-right .nav-dropdown-content {
+      margin-left: 0;
+    }
+  }
+
+
+  @media screen and (max-width: 768px) {
+    .distill-site-header.responsive {position: relative; min-height: 500px; }
+    .distill-site-header.responsive a.nav-toggle {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+    .distill-site-header.responsive a,
+    .distill-site-header.responsive .nav-dropdown {
+      display: block;
+      text-align: left;
+    }
+    .distill-site-header.responsive .nav-left,
+    .distill-site-header.responsive .nav-right {
+      width: 100%;
+    }
+    .distill-site-header.responsive .nav-dropdown {float: none;}
+    .distill-site-header.responsive .nav-dropdown-content {position: relative;}
+    .distill-site-header.responsive .nav-dropdown .nav-dropbtn {
+      display: block;
+      width: 100%;
+      text-align: left;
+    }
+  }
+
+  /* Site Footer */
+
+  .distill-site-footer {
+    width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+    z-index: 3;
+    margin-top: 30px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    text-align: center;
+  }
+
+  /* Headroom */
+
+  d-title {
+    padding-top: 6rem;
+  }
+
+  @media print {
+    d-title {
+      padding-top: 4rem;
+    }
+  }
+
+  .headroom {
+    z-index: 1000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+
+  .headroom--transition {
+    transition: all .4s ease-in-out;
+  }
+
+  .headroom--unpinned {
+    top: -100px;
+  }
+
+  .headroom--pinned {
+    top: 0;
+  }
+
+  /* adjust viewport for navbar height */
+  /* helps vertically center bootstrap (non-distill) content */
+  .min-vh-100 {
+    min-height: calc(100vh - 100px) !important;
+  }
+
+  </style>
+
+  <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+  <link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet"/>
+  <link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet"/>
+  <script src="site_libs/headroom-0.9.4/headroom.min.js"></script>
+  <script src="site_libs/autocomplete-0.37.1/autocomplete.min.js"></script>
+  <script src="site_libs/fuse-6.4.1/fuse.min.js"></script>
+
+  <script type="application/javascript">
+
+  function getMeta(metaName) {
+    var metas = document.getElementsByTagName('meta');
+    for (let i = 0; i < metas.length; i++) {
+      if (metas[i].getAttribute('name') === metaName) {
+        return metas[i].getAttribute('content');
+      }
+    }
+    return '';
+  }
+
+  function offsetURL(url) {
+    var offset = getMeta('distill:offset');
+    return offset ? offset + '/' + url : url;
+  }
+
+  function createFuseIndex() {
+
+    // create fuse index
+    var options = {
+      keys: [
+        { name: 'title', weight: 20 },
+        { name: 'categories', weight: 15 },
+        { name: 'description', weight: 10 },
+        { name: 'contents', weight: 5 },
+      ],
+      ignoreLocation: true,
+      threshold: 0
+    };
+    var fuse = new window.Fuse([], options);
+
+    // fetch the main search.json
+    return fetch(offsetURL('search.json'))
+      .then(function(response) {
+        if (response.status == 200) {
+          return response.json().then(function(json) {
+            // index main articles
+            json.articles.forEach(function(article) {
+              fuse.add(article);
+            });
+            // download collections and index their articles
+            return Promise.all(json.collections.map(function(collection) {
+              return fetch(offsetURL(collection)).then(function(response) {
+                if (response.status === 200) {
+                  return response.json().then(function(articles) {
+                    articles.forEach(function(article) {
+                      fuse.add(article);
+                    });
+                  })
+                } else {
+                  return Promise.reject(
+                    new Error('Unexpected status from search index request: ' +
+                              response.status)
+                  );
+                }
+              });
+            })).then(function() {
+              return fuse;
+            });
+          });
+
+        } else {
+          return Promise.reject(
+            new Error('Unexpected status from search index request: ' +
+                        response.status)
+          );
+        }
+      });
+  }
+
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+
+    // get search element (bail if we don't have one)
+    var searchEl = window.document.getElementById('distill-search');
+    if (!searchEl)
+      return;
+
+    createFuseIndex()
+      .then(function(fuse) {
+
+        // make search box visible
+        searchEl.classList.remove('hidden');
+
+        // initialize autocomplete
+        var options = {
+          autoselect: true,
+          hint: false,
+          minLength: 2,
+        };
+        window.autocomplete(searchEl, options, [{
+          source: function(query, callback) {
+            const searchOptions = {
+              isCaseSensitive: false,
+              shouldSort: true,
+              minMatchCharLength: 2,
+              limit: 10,
+            };
+            var results = fuse.search(query, searchOptions);
+            callback(results
+              .map(function(result) { return result.item; })
+            );
+          },
+          templates: {
+            suggestion: function(suggestion) {
+              var img = suggestion.preview && Object.keys(suggestion.preview).length > 0
+                ? `<img src="${offsetURL(suggestion.preview)}"</img>`
+                : '';
+              var html = `
+                <div class="search-item">
+                  <h3>${suggestion.title}</h3>
+                  <div class="search-item-description">
+                    ${suggestion.description || ''}
+                  </div>
+                  <div class="search-item-preview">
+                    ${img}
+                  </div>
+                </div>
+              `;
+              return html;
+            }
+          }
+        }]).on('autocomplete:selected', function(event, suggestion) {
+          window.location.href = offsetURL(suggestion.path);
+        });
+        // remove inline display style on autocompleter (we want to
+        // manage responsive display via css)
+        $('.algolia-autocomplete').css("display", "");
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+
+  });
+
+  </script>
+
+  <style type="text/css">
+
+  .nav-search {
+    font-size: x-small;
+  }
+
+  /* Algolioa Autocomplete */
+
+  .algolia-autocomplete {
+    display: inline-block;
+    margin-left: 10px;
+    vertical-align: sub;
+    background-color: white;
+    color: black;
+    padding: 6px;
+    padding-top: 8px;
+    padding-bottom: 0;
+    border-radius: 6px;
+    border: 1px #0F2E3D solid;
+    width: 180px;
+  }
+
+
+  @media screen and (max-width: 768px) {
+    .distill-site-nav .algolia-autocomplete {
+      display: none;
+      visibility: hidden;
+    }
+    .distill-site-nav.responsive .algolia-autocomplete {
+      display: inline-block;
+      visibility: visible;
+    }
+    .distill-site-nav.responsive .algolia-autocomplete .aa-dropdown-menu {
+      margin-left: 0;
+      width: 400px;
+      max-height: 400px;
+    }
+  }
+
+  .algolia-autocomplete .aa-input, .algolia-autocomplete .aa-hint {
+    width: 90%;
+    outline: none;
+    border: none;
+  }
+
+  .algolia-autocomplete .aa-hint {
+    color: #999;
+  }
+  .algolia-autocomplete .aa-dropdown-menu {
+    width: 550px;
+    max-height: 70vh;
+    overflow-x: visible;
+    overflow-y: scroll;
+    padding: 5px;
+    margin-top: 3px;
+    margin-left: -150px;
+    background-color: #fff;
+    border-radius: 5px;
+    border: 1px solid #999;
+    border-top: none;
+  }
+
+  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion {
+    cursor: pointer;
+    padding: 5px 4px;
+    border-bottom: 1px solid #eee;
+  }
+
+  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion:last-of-type {
+    border-bottom: none;
+    margin-bottom: 2px;
+  }
+
+  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item {
+    overflow: hidden;
+    font-size: 0.8em;
+    line-height: 1.4em;
+  }
+
+  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item h3 {
+    font-size: 1rem;
+    margin-block-start: 0;
+    margin-block-end: 5px;
+  }
+
+  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-description {
+    display: inline-block;
+    overflow: hidden;
+    height: 2.8em;
+    width: 80%;
+    margin-right: 4%;
+  }
+
+  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview {
+    display: inline-block;
+    width: 15%;
+  }
+
+  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview img {
+    height: 3em;
+    width: auto;
+    display: none;
+  }
+
+  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview img[src] {
+    display: initial;
+  }
+
+  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion.aa-cursor {
+    background-color: #eee;
+  }
+  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion em {
+    font-weight: bold;
+    font-style: normal;
+  }
+
+  </style>
+
+
+  <!--/radix_placeholder_navigation_in_header-->
+  <!--radix_placeholder_distill-->
+
+  <style type="text/css">
+
+  body {
+    background-color: white;
+  }
+
+  .pandoc-table {
+    width: 100%;
+  }
+
+  .pandoc-table>caption {
+    margin-bottom: 10px;
+  }
+
+  .pandoc-table th:not([align]) {
+    text-align: left;
+  }
+
+  .pagedtable-footer {
+    font-size: 15px;
+  }
+
+  d-byline .byline {
+    grid-template-columns: 2fr 2fr;
+  }
+
+  d-byline .byline h3 {
+    margin-block-start: 1.5em;
+  }
+
+  d-byline .byline .authors-affiliations h3 {
+    margin-block-start: 0.5em;
+  }
+
+  .authors-affiliations .orcid-id {
+    width: 16px;
+    height:16px;
+    margin-left: 4px;
+    margin-right: 4px;
+    vertical-align: middle;
+    padding-bottom: 2px;
+  }
+
+  d-title .dt-tags {
+    margin-top: 1em;
+    grid-column: text;
+  }
+
+  .dt-tags .dt-tag {
+    text-decoration: none;
+    display: inline-block;
+    color: rgba(0,0,0,0.6);
+    padding: 0em 0.4em;
+    margin-right: 0.5em;
+    margin-bottom: 0.4em;
+    font-size: 70%;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 3px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  d-article table.gt_table td,
+  d-article table.gt_table th {
+    border-bottom: none;
+    font-size: 100%;
+  }
+
+  .html-widget {
+    margin-bottom: 2.0em;
+  }
+
+  .l-screen-inset {
+    padding-right: 16px;
+  }
+
+  .l-screen .caption {
+    margin-left: 10px;
+  }
+
+  .shaded {
+    background: rgb(247, 247, 247);
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .shaded .html-widget {
+    margin-bottom: 0;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .shaded .shaded-content {
+    background: white;
+  }
+
+  .text-output {
+    margin-top: 0;
+    line-height: 1.5em;
+  }
+
+  .hidden {
+    display: none !important;
+  }
+
+  hr.section-separator {
+    border: none;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    margin: 0px;
+  }
+
+
+  d-byline {
+    border-top: none;
+  }
+
+  d-article {
+    padding-top: 2.5rem;
+    padding-bottom: 30px;
+    border-top: none;
+  }
+
+  d-appendix {
+    padding-top: 30px;
+  }
+
+  d-article>p>img {
+    width: 100%;
+  }
+
+  d-article h2 {
+    margin: 1rem 0 1.5rem 0;
+  }
+
+  d-article h3 {
+    margin-top: 1.5rem;
+  }
+
+  d-article iframe {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    margin-bottom: 2.0em;
+    width: 100%;
+  }
+
+  /* Tweak code blocks */
+
+  d-article div.sourceCode code,
+  d-article pre code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  d-article pre,
+  d-article div.sourceCode,
+  d-article div.sourceCode pre {
+    overflow: auto;
+  }
+
+  d-article div.sourceCode {
+    background-color: white;
+  }
+
+  d-article div.sourceCode pre {
+    padding-left: 10px;
+    font-size: 12px;
+    border-left: 2px solid rgba(0,0,0,0.1);
+  }
+
+  d-article pre {
+    font-size: 12px;
+    color: black;
+    background: none;
+    margin-top: 0;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 1.5;
+
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+  }
+
+  d-article pre a {
+    border-bottom: none;
+  }
+
+  d-article pre a:hover {
+    border-bottom: none;
+    text-decoration: underline;
+  }
+
+  d-article details {
+    grid-column: text;
+    margin-bottom: 0.8em;
+  }
+
+  @media(min-width: 768px) {
+
+  d-article pre,
+  d-article div.sourceCode,
+  d-article div.sourceCode pre {
+    overflow: visible !important;
+  }
+
+  d-article div.sourceCode pre {
+    padding-left: 18px;
+    font-size: 14px;
+  }
+
+  /* tweak for Pandoc numbered line within distill */
+  d-article pre.numberSource code > span {
+      left: -2em;
+  }
+
+  d-article pre {
+    font-size: 14px;
+  }
+
+  }
+
+  figure img.external {
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+    padding: 18px;
+    box-sizing: border-box;
+  }
+
+  /* CSS for d-contents */
+
+  .d-contents {
+    grid-column: text;
+    color: rgba(0,0,0,0.8);
+    font-size: 0.9em;
+    padding-bottom: 1em;
+    margin-bottom: 1em;
+    padding-bottom: 0.5em;
+    margin-bottom: 1em;
+    padding-left: 0.25em;
+    justify-self: start;
+  }
+
+  @media(min-width: 1000px) {
+    .d-contents.d-contents-float {
+      height: 0;
+      grid-column-start: 1;
+      grid-column-end: 4;
+      justify-self: center;
+      padding-right: 3em;
+      padding-left: 2em;
+    }
+  }
+
+  .d-contents nav h3 {
+    font-size: 18px;
+    margin-top: 0;
+    margin-bottom: 1em;
+  }
+
+  .d-contents li {
+    list-style-type: none
+  }
+
+  .d-contents nav > ul {
+    padding-left: 0;
+  }
+
+  .d-contents ul {
+    padding-left: 1em
+  }
+
+  .d-contents nav ul li {
+    margin-top: 0.6em;
+    margin-bottom: 0.2em;
+  }
+
+  .d-contents nav a {
+    font-size: 13px;
+    border-bottom: none;
+    text-decoration: none
+    color: rgba(0, 0, 0, 0.8);
+  }
+
+  .d-contents nav a:hover {
+    text-decoration: underline solid rgba(0, 0, 0, 0.6)
+  }
+
+  .d-contents nav > ul > li > a {
+    font-weight: 600;
+  }
+
+  .d-contents nav > ul > li > ul {
+    font-weight: inherit;
+  }
+
+  .d-contents nav > ul > li > ul > li {
+    margin-top: 0.2em;
+  }
+
+
+  .d-contents nav ul {
+    margin-top: 0;
+    margin-bottom: 0.25em;
+  }
+
+  .d-article-with-toc h2:nth-child(2) {
+    margin-top: 0;
+  }
+
+
+  /* Figure */
+
+  .figure {
+    position: relative;
+    margin-bottom: 2.5em;
+    margin-top: 1.5em;
+  }
+
+  .figure .caption {
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 12px;
+    line-height: 1.5em;
+  }
+
+  .figure img.external {
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+    padding: 18px;
+    box-sizing: border-box;
+  }
+
+  .figure .caption a {
+    color: rgba(0, 0, 0, 0.6);
+  }
+
+  .figure .caption b,
+  .figure .caption strong, {
+    font-weight: 600;
+    color: rgba(0, 0, 0, 1.0);
+  }
+
+  /* Citations */
+
+  d-article .citation {
+    color: inherit;
+    cursor: inherit;
+  }
+
+  div.hanging-indent{
+    margin-left: 1em; text-indent: -1em;
+  }
+
+  /* Citation hover box */
+
+  .tippy-box[data-theme~=light-border] {
+    background-color: rgba(250, 250, 250, 0.95);
+  }
+
+  .tippy-content > p {
+    margin-bottom: 0;
+    padding: 2px;
+  }
+
+
+  /* Tweak 1000px media break to show more text */
+
+  @media(min-width: 1000px) {
+    .base-grid,
+    distill-header,
+    d-title,
+    d-abstract,
+    d-article,
+    d-appendix,
+    distill-appendix,
+    d-byline,
+    d-footnote-list,
+    d-citation-list,
+    distill-footer {
+      grid-template-columns: [screen-start] 1fr [page-start kicker-start] 80px [middle-start] 50px [text-start kicker-end] 65px 65px 65px 65px 65px 65px 65px 65px [text-end gutter-start] 65px [middle-end] 65px [page-end gutter-end] 1fr [screen-end];
+      grid-column-gap: 16px;
+    }
+
+    .grid {
+      grid-column-gap: 16px;
+    }
+
+    d-article {
+      font-size: 1.06rem;
+      line-height: 1.7em;
+    }
+    figure .caption, .figure .caption, figure figcaption {
+      font-size: 13px;
+    }
+  }
+
+  @media(min-width: 1180px) {
+    .base-grid,
+    distill-header,
+    d-title,
+    d-abstract,
+    d-article,
+    d-appendix,
+    distill-appendix,
+    d-byline,
+    d-footnote-list,
+    d-citation-list,
+    distill-footer {
+      grid-template-columns: [screen-start] 1fr [page-start kicker-start] 60px [middle-start] 60px [text-start kicker-end] 60px 60px 60px 60px 60px 60px 60px 60px [text-end gutter-start] 60px [middle-end] 60px [page-end gutter-end] 1fr [screen-end];
+      grid-column-gap: 32px;
+    }
+
+    .grid {
+      grid-column-gap: 32px;
+    }
+  }
+
+
+  /* Get the citation styles for the appendix (not auto-injected on render since
+     we do our own rendering of the citation appendix) */
+
+  d-appendix .citation-appendix,
+  .d-appendix .citation-appendix {
+    font-size: 11px;
+    line-height: 15px;
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+    padding-left: 18px;
+    border: 1px solid rgba(0,0,0,0.1);
+    background: rgba(0, 0, 0, 0.02);
+    padding: 10px 18px;
+    border-radius: 3px;
+    color: rgba(150, 150, 150, 1);
+    overflow: hidden;
+    margin-top: -12px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+
+  /* Include appendix styles here so they can be overridden */
+
+  d-appendix {
+    contain: layout style;
+    font-size: 0.8em;
+    line-height: 1.7em;
+    margin-top: 60px;
+    margin-bottom: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    color: rgba(0,0,0,0.5);
+    padding-top: 60px;
+    padding-bottom: 48px;
+  }
+
+  d-appendix h3 {
+    grid-column: page-start / text-start;
+    font-size: 15px;
+    font-weight: 500;
+    margin-top: 1em;
+    margin-bottom: 0;
+    color: rgba(0,0,0,0.65);
+  }
+
+  d-appendix h3 + * {
+    margin-top: 1em;
+  }
+
+  d-appendix ol {
+    padding: 0 0 0 15px;
+  }
+
+  @media (min-width: 768px) {
+    d-appendix ol {
+      padding: 0 0 0 30px;
+      margin-left: -30px;
+    }
+  }
+
+  d-appendix li {
+    margin-bottom: 1em;
+  }
+
+  d-appendix a {
+    color: rgba(0, 0, 0, 0.6);
+  }
+
+  d-appendix > * {
+    grid-column: text;
+  }
+
+  d-appendix > d-footnote-list,
+  d-appendix > d-citation-list,
+  d-appendix > distill-appendix {
+    grid-column: screen;
+  }
+
+  /* Include footnote styles here so they can be overridden */
+
+  d-footnote-list {
+    contain: layout style;
+  }
+
+  d-footnote-list > * {
+    grid-column: text;
+  }
+
+  d-footnote-list a.footnote-backlink {
+    color: rgba(0,0,0,0.3);
+    padding-left: 0.5em;
+  }
+
+
+
+  /* Anchor.js */
+
+  .anchorjs-link {
+    /*transition: all .25s linear; */
+    text-decoration: none;
+    border-bottom: none;
+  }
+  *:hover > .anchorjs-link {
+    margin-left: -1.125em !important;
+    text-decoration: none;
+    border-bottom: none;
+  }
+
+  /* Social footer */
+
+  .social_footer {
+    margin-top: 30px;
+    margin-bottom: 0;
+    color: rgba(0,0,0,0.67);
+  }
+
+  .disqus-comments {
+    margin-right: 30px;
+  }
+
+  .disqus-comment-count {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+  }
+
+  #disqus_thread {
+    margin-top: 30px;
+  }
+
+  .article-sharing a {
+    border-bottom: none;
+    margin-right: 8px;
+  }
+
+  .article-sharing a:hover {
+    border-bottom: none;
+  }
+
+  .sidebar-section.subscribe {
+    font-size: 12px;
+    line-height: 1.6em;
+  }
+
+  .subscribe p {
+    margin-bottom: 0.5em;
+  }
+
+
+  .article-footer .subscribe {
+    font-size: 15px;
+    margin-top: 45px;
+  }
+
+
+  .sidebar-section.custom {
+    font-size: 12px;
+    line-height: 1.6em;
+  }
+
+  .custom p {
+    margin-bottom: 0.5em;
+  }
+
+  /* Styles for listing layout (hide title) */
+  .layout-listing d-title, .layout-listing .d-title {
+    display: none;
+  }
+
+  /* Styles for posts lists (not auto-injected) */
+
+
+  .posts-with-sidebar {
+    padding-left: 45px;
+    padding-right: 45px;
+  }
+
+  .posts-list .description h2,
+  .posts-list .description p {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+  }
+
+  .posts-list .description h2 {
+    font-weight: 700;
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .posts-list h2.post-tag {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    padding-bottom: 12px;
+  }
+  .posts-list {
+    margin-top: 60px;
+    margin-bottom: 24px;
+  }
+
+  .posts-list .post-preview {
+    text-decoration: none;
+    overflow: hidden;
+    display: block;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 24px 0;
+  }
+
+  .post-preview-last {
+    border-bottom: none !important;
+  }
+
+  .posts-list .posts-list-caption {
+    grid-column: screen;
+    font-weight: 400;
+  }
+
+  .posts-list .post-preview h2 {
+    margin: 0 0 6px 0;
+    line-height: 1.2em;
+    font-style: normal;
+    font-size: 24px;
+  }
+
+  .posts-list .post-preview p {
+    margin: 0 0 12px 0;
+    line-height: 1.4em;
+    font-size: 16px;
+  }
+
+  .posts-list .post-preview .thumbnail {
+    box-sizing: border-box;
+    margin-bottom: 24px;
+    position: relative;
+    max-width: 500px;
+  }
+  .posts-list .post-preview img {
+    width: 100%;
+    display: block;
+  }
+
+  .posts-list .metadata {
+    font-size: 12px;
+    line-height: 1.4em;
+    margin-bottom: 18px;
+  }
+
+  .posts-list .metadata > * {
+    display: inline-block;
+  }
+
+  .posts-list .metadata .publishedDate {
+    margin-right: 2em;
+  }
+
+  .posts-list .metadata .dt-authors {
+    display: block;
+    margin-top: 0.3em;
+    margin-right: 2em;
+  }
+
+  .posts-list .dt-tags {
+    display: block;
+    line-height: 1em;
+  }
+
+  .posts-list .dt-tags .dt-tag {
+    display: inline-block;
+    color: rgba(0,0,0,0.6);
+    padding: 0.3em 0.4em;
+    margin-right: 0.2em;
+    margin-bottom: 0.4em;
+    font-size: 60%;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 3px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .posts-list img {
+    opacity: 1;
+  }
+
+  .posts-list img[data-src] {
+    opacity: 0;
+  }
+
+  .posts-more {
+    clear: both;
+  }
+
+
+  .posts-sidebar {
+    font-size: 16px;
+  }
+
+  .posts-sidebar h3 {
+    font-size: 16px;
+    margin-top: 0;
+    margin-bottom: 0.5em;
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+
+  .sidebar-section {
+    margin-bottom: 30px;
+  }
+
+  .categories ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .categories li {
+    color: rgba(0, 0, 0, 0.8);
+    margin-bottom: 0;
+  }
+
+  .categories li>a {
+    border-bottom: none;
+  }
+
+  .categories li>a:hover {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  }
+
+  .categories .active {
+    font-weight: 600;
+  }
+
+  .categories .category-count {
+    color: rgba(0, 0, 0, 0.4);
+  }
+
+
+  @media(min-width: 768px) {
+    .posts-list .post-preview h2 {
+      font-size: 26px;
+    }
+    .posts-list .post-preview .thumbnail {
+      float: right;
+      width: 30%;
+      margin-bottom: 0;
+    }
+    .posts-list .post-preview .description {
+      float: left;
+      width: 45%;
+    }
+    .posts-list .post-preview .metadata {
+      float: left;
+      width: 20%;
+      margin-top: 8px;
+    }
+    .posts-list .post-preview p {
+      margin: 0 0 12px 0;
+      line-height: 1.5em;
+      font-size: 16px;
+    }
+    .posts-with-sidebar .posts-list {
+      float: left;
+      width: 75%;
+    }
+    .posts-with-sidebar .posts-sidebar {
+      float: right;
+      width: 20%;
+      margin-top: 60px;
+      padding-top: 24px;
+      padding-bottom: 24px;
+    }
+  }
+
+
+  /* Improve display for browsers without grid (IE/Edge <= 15) */
+
+  .downlevel {
+    line-height: 1.6em;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+  }
+
+  .downlevel .d-title {
+    padding-top: 6rem;
+    padding-bottom: 1.5rem;
+  }
+
+  .downlevel .d-title h1 {
+    font-size: 50px;
+    font-weight: 700;
+    line-height: 1.1em;
+    margin: 0 0 0.5rem;
+  }
+
+  .downlevel .d-title p {
+    font-weight: 300;
+    font-size: 1.2rem;
+    line-height: 1.55em;
+    margin-top: 0;
+  }
+
+  .downlevel .d-byline {
+    padding-top: 0.8em;
+    padding-bottom: 0.8em;
+    font-size: 0.8rem;
+    line-height: 1.8em;
+  }
+
+  .downlevel .section-separator {
+    border: none;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .downlevel .d-article {
+    font-size: 1.06rem;
+    line-height: 1.7em;
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+  }
+
+
+  .downlevel .d-appendix {
+    padding-left: 0;
+    padding-right: 0;
+    max-width: none;
+    font-size: 0.8em;
+    line-height: 1.7em;
+    margin-bottom: 0;
+    color: rgba(0,0,0,0.5);
+    padding-top: 40px;
+    padding-bottom: 48px;
+  }
+
+  .downlevel .footnotes ol {
+    padding-left: 13px;
+  }
+
+  .downlevel .base-grid,
+  .downlevel .distill-header,
+  .downlevel .d-title,
+  .downlevel .d-abstract,
+  .downlevel .d-article,
+  .downlevel .d-appendix,
+  .downlevel .distill-appendix,
+  .downlevel .d-byline,
+  .downlevel .d-footnote-list,
+  .downlevel .d-citation-list,
+  .downlevel .distill-footer,
+  .downlevel .appendix-bottom,
+  .downlevel .posts-container {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+  @media(min-width: 768px) {
+    .downlevel .base-grid,
+    .downlevel .distill-header,
+    .downlevel .d-title,
+    .downlevel .d-abstract,
+    .downlevel .d-article,
+    .downlevel .d-appendix,
+    .downlevel .distill-appendix,
+    .downlevel .d-byline,
+    .downlevel .d-footnote-list,
+    .downlevel .d-citation-list,
+    .downlevel .distill-footer,
+    .downlevel .appendix-bottom,
+    .downlevel .posts-container {
+    padding-left: 150px;
+    padding-right: 150px;
+    max-width: 900px;
+  }
+  }
+
+  .downlevel pre code {
+    display: block;
+    border-left: 2px solid rgba(0, 0, 0, .1);
+    padding: 0 0 0 20px;
+    font-size: 14px;
+  }
+
+  .downlevel code, .downlevel pre {
+    color: black;
+    background: none;
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 1.5;
+
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+  }
+
+  .downlevel .posts-list .post-preview {
+    color: inherit;
+  }
+
+
+
+  </style>
+
+  <script type="application/javascript">
+
+  function is_downlevel_browser() {
+    if (bowser.isUnsupportedBrowser({ msie: "12", msedge: "16"},
+                                   window.navigator.userAgent)) {
+      return true;
+    } else {
+      return window.load_distill_framework === undefined;
+    }
+  }
+
+  // show body when load is complete
+  function on_load_complete() {
+
+    // add anchors
+    if (window.anchors) {
+      window.anchors.options.placement = 'left';
+      window.anchors.add('d-article > h2, d-article > h3, d-article > h4, d-article > h5');
+    }
+
+
+    // set body to visible
+    document.body.style.visibility = 'visible';
+
+    // force redraw for leaflet widgets
+    if (window.HTMLWidgets) {
+      var maps = window.HTMLWidgets.findAll(".leaflet");
+      $.each(maps, function(i, el) {
+        var map = this.getMap();
+        map.invalidateSize();
+        map.eachLayer(function(layer) {
+          if (layer instanceof L.TileLayer)
+            layer.redraw();
+        });
+      });
+    }
+
+    // trigger 'shown' so htmlwidgets resize
+    $('d-article').trigger('shown');
+  }
+
+  function init_distill() {
+
+    init_common();
+
+    // create front matter
+    var front_matter = $('<d-front-matter></d-front-matter>');
+    $('#distill-front-matter').wrap(front_matter);
+
+    // create d-title
+    $('.d-title').changeElementType('d-title');
+
+    // separator
+    var separator = '<hr class="section-separator" style="clear: both"/>';
+    // prepend separator above appendix
+    $('.d-byline').before(separator);
+    $('.d-article').before(separator);
+
+    // create d-byline
+    var byline = $('<d-byline></d-byline>');
+    $('.d-byline').replaceWith(byline);
+
+    // create d-article
+    var article = $('<d-article></d-article>');
+    $('.d-article').wrap(article).children().unwrap();
+
+    // move posts container into article
+    $('.posts-container').appendTo($('d-article'));
+
+    // create d-appendix
+    $('.d-appendix').changeElementType('d-appendix');
+
+    // flag indicating that we have appendix items
+    var appendix = $('.appendix-bottom').children('h3').length > 0;
+
+    // replace footnotes with <d-footnote>
+    $('.footnote-ref').each(function(i, val) {
+      appendix = true;
+      var href = $(this).attr('href');
+      var id = href.replace('#', '');
+      var fn = $('#' + id);
+      var fn_p = $('#' + id + '>p');
+      fn_p.find('.footnote-back').remove();
+      var text = fn_p.html();
+      var dtfn = $('<d-footnote></d-footnote>');
+      dtfn.html(text);
+      $(this).replaceWith(dtfn);
+    });
+    // remove footnotes
+    $('.footnotes').remove();
+
+    // move refs into #references-listing
+    $('#references-listing').replaceWith($('#refs'));
+
+    $('h1.appendix, h2.appendix').each(function(i, val) {
+      $(this).changeElementType('h3');
+    });
+    $('h3.appendix').each(function(i, val) {
+      var id = $(this).attr('id');
+      $('.d-contents a[href="#' + id + '"]').parent().remove();
+      appendix = true;
+      $(this).nextUntil($('h1, h2, h3')).addBack().appendTo($('d-appendix'));
+    });
+
+    // show d-appendix if we have appendix content
+    $("d-appendix").css('display', appendix ? 'grid' : 'none');
+
+    // localize layout chunks to just output
+    $('.layout-chunk').each(function(i, val) {
+
+      // capture layout
+      var layout = $(this).attr('data-layout');
+
+      // apply layout to markdown level block elements
+      var elements = $(this).children().not('details, div.sourceCode, pre, script');
+      elements.each(function(i, el) {
+        var layout_div = $('<div class="' + layout + '"></div>');
+        if (layout_div.hasClass('shaded')) {
+          var shaded_content = $('<div class="shaded-content"></div>');
+          $(this).wrap(shaded_content);
+          $(this).parent().wrap(layout_div);
+        } else {
+          $(this).wrap(layout_div);
+        }
+      });
+
+
+      // unwrap the layout-chunk div
+      $(this).children().unwrap();
+    });
+
+    // remove code block used to force  highlighting css
+    $('.distill-force-highlighting-css').parent().remove();
+
+    // remove empty line numbers inserted by pandoc when using a
+    // custom syntax highlighting theme, except when numbering line
+    // in code chunk
+    $('pre:not(.numberLines) code.sourceCode a:empty').remove();
+
+    // load distill framework
+    load_distill_framework();
+
+    // wait for window.distillRunlevel == 4 to do post processing
+    function distill_post_process() {
+
+      if (!window.distillRunlevel || window.distillRunlevel < 4)
+        return;
+
+      // hide author/affiliations entirely if we have no authors
+      var front_matter = JSON.parse($("#distill-front-matter").html());
+      var have_authors = front_matter.authors && front_matter.authors.length > 0;
+      if (!have_authors)
+        $('d-byline').addClass('hidden');
+
+      // article with toc class
+      $('.d-contents').parent().addClass('d-article-with-toc');
+
+      // strip links that point to #
+      $('.authors-affiliations').find('a[href="#"]').removeAttr('href');
+
+      // add orcid ids
+      $('.authors-affiliations').find('.author').each(function(i, el) {
+        var orcid_id = front_matter.authors[i].orcidID;
+        var author_name = front_matter.authors[i].author
+        if (orcid_id) {
+          var a = $('<a></a>');
+          a.attr('href', 'https://orcid.org/' + orcid_id);
+          var img = $('<img></img>');
+          img.addClass('orcid-id');
+          img.attr('alt', author_name ? 'ORCID ID for ' + author_name : 'ORCID ID');
+          img.attr('src','data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==');
+          a.append(img);
+          $(this).append(a);
+        }
+      });
+
+      // hide elements of author/affiliations grid that have no value
+      function hide_byline_column(caption) {
+        $('d-byline').find('h3:contains("' + caption + '")').parent().css('visibility', 'hidden');
+      }
+
+      // affiliations
+      var have_affiliations = false;
+      for (var i = 0; i<front_matter.authors.length; ++i) {
+        var author = front_matter.authors[i];
+        if (author.affiliation !== "&nbsp;") {
+          have_affiliations = true;
+          break;
+        }
+      }
+      if (!have_affiliations)
+        $('d-byline').find('h3:contains("Affiliations")').css('visibility', 'hidden');
+
+      // published date
+      if (!front_matter.publishedDate)
+        hide_byline_column("Published");
+
+      // document object identifier
+      var doi = $('d-byline').find('h3:contains("DOI")');
+      var doi_p = doi.next().empty();
+      if (!front_matter.doi) {
+        // if we have a citation and valid citationText then link to that
+        if ($('#citation').length > 0 && front_matter.citationText) {
+          doi.html('Citation');
+          $('<a href="#citation"></a>')
+            .text(front_matter.citationText)
+            .appendTo(doi_p);
+        } else {
+          hide_byline_column("DOI");
+        }
+      } else {
+        $('<a></a>')
+           .attr('href', "https://doi.org/" + front_matter.doi)
+           .html(front_matter.doi)
+           .appendTo(doi_p);
+      }
+
+       // change plural form of authors/affiliations
+      if (front_matter.authors.length === 1) {
+        var grid = $('.authors-affiliations');
+        grid.children('h3:contains("Authors")').text('Author');
+        grid.children('h3:contains("Affiliations")').text('Affiliation');
+      }
+
+      // remove d-appendix and d-footnote-list local styles
+      $('d-appendix > style:first-child').remove();
+      $('d-footnote-list > style:first-child').remove();
+
+      // move appendix-bottom entries to the bottom
+      $('.appendix-bottom').appendTo('d-appendix').children().unwrap();
+      $('.appendix-bottom').remove();
+
+      // hoverable references
+      $('span.citation[data-cites]').each(function() {
+        const citeChild = $(this).children()[0]
+        // Do not process if @xyz has been used without escaping and without bibliography activated
+        // https://github.com/rstudio/distill/issues/466
+        if (citeChild === undefined) return true
+
+        if (citeChild.nodeName == "D-FOOTNOTE") {
+          var fn = citeChild
+          $(this).html(fn.shadowRoot.querySelector("sup"))
+          $(this).id = fn.id
+          fn.remove()
+        }
+        var refs = $(this).attr('data-cites').split(" ");
+        var refHtml = refs.map(function(ref) {
+          // Could use CSS.escape too here, we insure backward compatibility in navigator
+          return "<p>" + $('div[id="ref-' + ref + '"]').html() + "</p>";
+        }).join("\n");
+        window.tippy(this, {
+          allowHTML: true,
+          content: refHtml,
+          maxWidth: 500,
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start'
+        });
+      });
+
+      // fix footnotes in tables (#411)
+      // replacing broken distill.pub feature
+      $('table d-footnote').each(function() {
+        // we replace internal showAtNode methode which is triggered when hovering a footnote
+        this.hoverBox.showAtNode = function(node) {
+          // ported from https://github.com/distillpub/template/pull/105/files
+          calcOffset = function(elem) {
+              let x = elem.offsetLeft;
+              let y = elem.offsetTop;
+              // Traverse upwards until an `absolute` element is found or `elem`
+              // becomes null.
+              while (elem = elem.offsetParent && elem.style.position != 'absolute') {
+                  x += elem.offsetLeft;
+                  y += elem.offsetTop;
+              }
+
+              return { left: x, top: y };
+          }
+          // https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/offsetTop
+          const bbox = node.getBoundingClientRect();
+          const offset = calcOffset(node);
+          this.show([offset.left + bbox.width, offset.top + bbox.height]);
+        }
+      })
+
+      // clear polling timer
+      clearInterval(tid);
+
+      // show body now that everything is ready
+      on_load_complete();
+    }
+
+    var tid = setInterval(distill_post_process, 50);
+    distill_post_process();
+
+  }
+
+  function init_downlevel() {
+
+    init_common();
+
+     // insert hr after d-title
+    $('.d-title').after($('<hr class="section-separator"/>'));
+
+    // check if we have authors
+    var front_matter = JSON.parse($("#distill-front-matter").html());
+    var have_authors = front_matter.authors && front_matter.authors.length > 0;
+
+    // manage byline/border
+    if (!have_authors)
+      $('.d-byline').remove();
+    $('.d-byline').after($('<hr class="section-separator"/>'));
+    $('.d-byline a').remove();
+
+    // remove toc
+    $('.d-contents').remove();
+
+    // move appendix elements
+    $('h1.appendix, h2.appendix').each(function(i, val) {
+      $(this).changeElementType('h3');
+    });
+    $('h3.appendix').each(function(i, val) {
+      $(this).nextUntil($('h1, h2, h3')).addBack().appendTo($('.d-appendix'));
+    });
+
+
+    // inject headers into references and footnotes
+    var refs_header = $('<h3></h3>');
+    refs_header.text('References');
+    $('#refs').prepend(refs_header);
+
+    var footnotes_header = $('<h3></h3');
+    footnotes_header.text('Footnotes');
+    $('.footnotes').children('hr').first().replaceWith(footnotes_header);
+
+    // move appendix-bottom entries to the bottom
+    $('.appendix-bottom').appendTo('.d-appendix').children().unwrap();
+    $('.appendix-bottom').remove();
+
+    // remove appendix if it's empty
+    if ($('.d-appendix').children().length === 0)
+      $('.d-appendix').remove();
+
+    // prepend separator above appendix
+    $('.d-appendix').before($('<hr class="section-separator" style="clear: both"/>'));
+
+    // trim code
+    $('pre>code').each(function(i, val) {
+      $(this).html($.trim($(this).html()));
+    });
+
+    // move posts-container right before article
+    $('.posts-container').insertBefore($('.d-article'));
+
+    $('body').addClass('downlevel');
+
+    on_load_complete();
+  }
+
+
+  function init_common() {
+
+    // jquery plugin to change element types
+    (function($) {
+      $.fn.changeElementType = function(newType) {
+        var attrs = {};
+
+        $.each(this[0].attributes, function(idx, attr) {
+          attrs[attr.nodeName] = attr.nodeValue;
+        });
+
+        this.replaceWith(function() {
+          return $("<" + newType + "/>", attrs).append($(this).contents());
+        });
+      };
+    })(jQuery);
+
+    // prevent underline for linked images
+    $('a > img').parent().css({'border-bottom' : 'none'});
+
+    // mark non-body figures created by knitr chunks as 100% width
+    $('.layout-chunk').each(function(i, val) {
+      var figures = $(this).find('img, .html-widget');
+      // ignore leaflet img layers (#106)
+      figures = figures.filter(':not(img[class*="leaflet"])')
+      if ($(this).attr('data-layout') !== "l-body") {
+        figures.css('width', '100%');
+      } else {
+        figures.css('max-width', '100%');
+        figures.filter("[width]").each(function(i, val) {
+          var fig = $(this);
+          fig.css('width', fig.attr('width') + 'px');
+        });
+
+      }
+    });
+
+    // auto-append index.html to post-preview links in file: protocol
+    // and in rstudio ide preview
+    $('.post-preview').each(function(i, val) {
+      if (window.location.protocol === "file:")
+        $(this).attr('href', $(this).attr('href') + "index.html");
+    });
+
+    // get rid of index.html references in header
+    if (window.location.protocol !== "file:") {
+      $('.distill-site-header a[href]').each(function(i,val) {
+        $(this).attr('href', $(this).attr('href').replace(/^index[.]html/, "./"));
+      });
+    }
+
+    // add class to pandoc style tables
+    $('tr.header').parent('thead').parent('table').addClass('pandoc-table');
+    $('.kable-table').children('table').addClass('pandoc-table');
+
+    // add figcaption style to table captions
+    $('caption').parent('table').addClass("figcaption");
+
+    // initialize posts list
+    if (window.init_posts_list)
+      window.init_posts_list();
+
+    // implmement disqus comment link
+    $('.disqus-comment-count').click(function() {
+      window.headroom_prevent_pin = true;
+      $('#disqus_thread').toggleClass('hidden');
+      if (!$('#disqus_thread').hasClass('hidden')) {
+        var offset = $(this).offset();
+        $(window).resize();
+        $('html, body').animate({
+          scrollTop: offset.top - 35
+        });
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    if (is_downlevel_browser())
+      init_downlevel();
+    else
+      window.addEventListener('WebComponentsReady', init_distill);
+  });
+
+  </script>
+
+  <style type="text/css">
+  /* base variables */
+
+  /* Edit the CSS properties in this file to create a custom
+     Distill theme. Only edit values in the right column
+     for each row; values shown are the CSS defaults.
+     To return any property to the default,
+     you may set its value to: unset
+     All rows must end with a semi-colon.                      */
+
+  /* Optional: embed custom fonts here with `@import`          */
+  /* This must remain at the top of this file.                 */
+
+
+
+  html {
+    /*-- Main font sizes --*/
+    --title-size:      50px;
+    --body-size:       1.06rem;
+    --code-size:       14px;
+    --aside-size:      12px;
+    --fig-cap-size:    13px;
+    /*-- Main font colors --*/
+    --title-color:     #000000;
+    --header-color:    rgba(0, 0, 0, 0.8);
+    --body-color:      rgba(0, 0, 0, 0.8);
+    --aside-color:     rgba(0, 0, 0, 0.6);
+    --fig-cap-color:   rgba(0, 0, 0, 0.6);
+    /*-- Specify custom fonts ~~~ must be imported above   --*/
+    --heading-font:    sans-serif;
+    --mono-font:       monospace;
+    --body-font:       sans-serif;
+    --navbar-font:     sans-serif;  /* websites + blogs only */
+  }
+
+  /*-- ARTICLE METADATA --*/
+  d-byline {
+    --heading-size:    0.6rem;
+    --heading-color:   rgba(0, 0, 0, 0.5);
+    --body-size:       0.8rem;
+    --body-color:      rgba(0, 0, 0, 0.8);
+  }
+
+  /*-- ARTICLE TABLE OF CONTENTS --*/
+  .d-contents {
+    --heading-size:    18px;
+    --contents-size:   13px;
+  }
+
+  /*-- ARTICLE APPENDIX --*/
+  d-appendix {
+    --heading-size:    15px;
+    --heading-color:   rgba(0, 0, 0, 0.65);
+    --text-size:       0.8em;
+    --text-color:      rgba(0, 0, 0, 0.5);
+  }
+
+  /*-- WEBSITE HEADER + FOOTER --*/
+  /* These properties only apply to Distill sites and blogs  */
+
+  .distill-site-header {
+    --title-size:       18px;
+    --text-color:       rgba(255, 255, 255, 0.8);
+    --text-size:        15px;
+    --hover-color:      white;
+    --bkgd-color:       #0F2E3D;
+  }
+
+  .distill-site-footer {
+    --text-color:       rgba(255, 255, 255, 0.8);
+    --text-size:        15px;
+    --hover-color:      white;
+    --bkgd-color:       #0F2E3D;
+  }
+
+  /*-- Additional custom styles --*/
+  /* Add any additional CSS rules below                      */
+  </style>
+  <style type="text/css">
+  /* base variables */
+
+  /* Edit the CSS properties in this file to create a custom
+     Distill theme. Only edit values in the right column
+     for each row; values shown are the CSS defaults.
+     To return any property to the default,
+     you may set its value to: unset
+     All rows must end with a semi-colon.                      */
+
+  /* Optional: embed custom fonts here with `@import`          */
+  /* This must remain at the top of this file.                 */
+
+  @import url('https://fonts.googleapis.com/css2?family=Oswald');
+  @import url('https://fonts.googleapis.com/css2?family=Roboto');
+
+  html {
+    /*-- Main font sizes --*/
+    --title-size:      50px;
+    --body-size:       1.06rem;
+    --code-size:       14px;
+    --aside-size:      12px;
+    --fig-cap-size:    13px;
+    /*-- Main font colors --*/
+    --title-color:     #000000;
+    --header-color:    rgba(0, 0, 0, 0.8);
+    --body-color:      rgba(0, 0, 0, 0.8);
+    --aside-color:     rgba(0, 0, 0, 0.6);
+    --fig-cap-color:   rgba(0, 0, 0, 0.6);
+    /*-- Specify custom fonts ~~~ must be imported above   --*/
+    --heading-font:    "Oswald", serif;
+    --mono-font:       "Roboto", monospace;
+    --body-font:       "Roboto", monospace;
+    --navbar-font:     "Oswald", serif;  /* websites + blogs only */
+  }
+
+  /*-- ARTICLE METADATA --*/
+  d-byline {
+    --heading-size:    0.6rem;
+    --heading-color:   rgba(0, 0, 0, 0.5);
+    --body-size:       0.8rem;
+    --body-color:      rgba(0, 0, 0, 0.8);
+  }
+
+  /*-- ARTICLE TABLE OF CONTENTS --*/
+  .d-contents {
+    --heading-size:    18px;
+    --contents-size:   13px;
+  }
+
+  /*-- ARTICLE APPENDIX --*/
+  d-appendix {
+    --heading-size:    15px;
+    --heading-color:   rgba(0, 0, 0, 0.65);
+    --text-size:       0.8em;
+    --text-color:      rgba(0, 0, 0, 0.5);
+  }
+
+  /*-- WEBSITE HEADER + FOOTER --*/
+  /* These properties only apply to Distill sites and blogs  */
+
+  .distill-site-header {
+    --title-size:       18px;
+    --text-color:       rgba(255, 255, 255, 0.8);
+    --text-size:        15px;
+    --hover-color:      white;
+    --bkgd-color:       #6574B2;
+  }
+
+  .distill-site-footer {
+    --text-color:       rgba(255, 255, 255, 0.8);
+    --text-size:        15px;
+    --hover-color:      white;
+    --bkgd-color:       #6574B2;
+  }
+
+  /*-- Additional custom styles --*/
+  /* Add any additional CSS rules below                      */
+  </style>
+  <style type="text/css">
+  /* base style */
+
+  /* FONT FAMILIES */
+
+  :root {
+    --heading-default: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+    --mono-default: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    --body-default: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+  }
+
+  body,
+  .posts-list .post-preview p,
+  .posts-list .description p {
+    font-family: var(--body-font), var(--body-default);
+  }
+
+  h1, h2, h3, h4, h5, h6,
+  .posts-list .post-preview h2,
+  .posts-list .description h2 {
+    font-family: var(--heading-font), var(--heading-default);
+  }
+
+  d-article div.sourceCode code,
+  d-article pre code {
+    font-family: var(--mono-font), var(--mono-default);
+  }
+
+
+  /*-- TITLE --*/
+  d-title h1,
+  .posts-list > h1 {
+    color: var(--title-color, black);
+  }
+
+  d-title h1 {
+    font-size: var(--title-size, 50px);
+  }
+
+  /*-- HEADERS --*/
+  d-article h1,
+  d-article h2,
+  d-article h3,
+  d-article h4,
+  d-article h5,
+  d-article h6 {
+    color: var(--header-color, rgba(0, 0, 0, 0.8));
+  }
+
+  /*-- BODY --*/
+  d-article > p,  /* only text inside of <p> tags */
+  d-article > ul, /* lists */
+  d-article > ol {
+    color: var(--body-color, rgba(0, 0, 0, 0.8));
+    font-size: var(--body-size, 1.06rem);
+  }
+
+
+  /*-- CODE --*/
+  d-article div.sourceCode code,
+  d-article pre code {
+    font-size: var(--code-size, 14px);
+  }
+
+  /*-- ASIDE --*/
+  d-article aside {
+    font-size: var(--aside-size, 12px);
+    color: var(--aside-color, rgba(0, 0, 0, 0.6));
+  }
+
+  /*-- FIGURE CAPTIONS --*/
+  figure .caption,
+  figure figcaption,
+  .figure .caption {
+    font-size: var(--fig-cap-size, 13px);
+    color: var(--fig-cap-color, rgba(0, 0, 0, 0.6));
+  }
+
+  /*-- METADATA --*/
+  d-byline h3 {
+    font-size: var(--heading-size, 0.6rem);
+    color: var(--heading-color, rgba(0, 0, 0, 0.5));
+  }
+
+  d-byline {
+    font-size: var(--body-size, 0.8rem);
+    color: var(--body-color, rgba(0, 0, 0, 0.8));
+  }
+
+  d-byline a,
+  d-article d-byline a {
+    color: var(--body-color, rgba(0, 0, 0, 0.8));
+  }
+
+  /*-- TABLE OF CONTENTS --*/
+  .d-contents nav h3 {
+    font-size: var(--heading-size, 18px);
+  }
+
+  .d-contents nav a {
+    font-size: var(--contents-size, 13px);
+  }
+
+  /*-- APPENDIX --*/
+  d-appendix h3 {
+    font-size: var(--heading-size, 15px);
+    color: var(--heading-color, rgba(0, 0, 0, 0.65));
+  }
+
+  d-appendix {
+    font-size: var(--text-size, 0.8em);
+    color: var(--text-color, rgba(0, 0, 0, 0.5));
+  }
+
+  d-appendix d-footnote-list a.footnote-backlink {
+    color: var(--text-color, rgba(0, 0, 0, 0.5));
+  }
+
+  /*-- WEBSITE HEADER + FOOTER --*/
+  .distill-site-header .title {
+    font-size: var(--title-size, 18px);
+    font-family: var(--navbar-font), var(--heading-default);
+  }
+
+  .distill-site-header a,
+  .nav-dropdown .nav-dropbtn {
+    font-family: var(--navbar-font), var(--heading-default);
+  }
+
+  .nav-dropdown .nav-dropbtn {
+    color: var(--text-color, rgba(255, 255, 255, 0.8));
+    font-size: var(--text-size, 15px);
+  }
+
+  .distill-site-header a:hover,
+  .nav-dropdown:hover .nav-dropbtn {
+    color: var(--hover-color, white);
+  }
+
+  .distill-site-header {
+    font-size: var(--text-size, 15px);
+    color: var(--text-color, rgba(255, 255, 255, 0.8));
+    background-color: var(--bkgd-color, #0F2E3D);
+  }
+
+  .distill-site-footer {
+    font-size: var(--text-size, 15px);
+    color: var(--text-color, rgba(255, 255, 255, 0.8));
+    background-color: var(--bkgd-color, #0F2E3D);
+  }
+
+  .distill-site-footer a:hover {
+    color: var(--hover-color, white);
+  }</style>
+  <!--/radix_placeholder_distill-->
+  <script src="site_libs/header-attrs-2.26/header-attrs.js"></script>
+  <link href="site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+  <script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+  <script src="site_libs/plotly-binding-4.10.4/plotly.js"></script>
+  <script src="site_libs/typedarray-0.1/typedarray.min.js"></script>
+  <script src="site_libs/jquery-3.5.1/jquery.min.js"></script>
+  <link href="site_libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
+  <script src="site_libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+  <link href="site_libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+  <script src="site_libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+  <script src="site_libs/popper-2.6.0/popper.min.js"></script>
+  <link href="site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
+  <link href="site_libs/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
+  <script src="site_libs/tippy-6.2.7/tippy.umd.min.js"></script>
+  <script src="site_libs/anchor-4.2.2/anchor.min.js"></script>
+  <script src="site_libs/bowser-1.9.3/bowser.min.js"></script>
+  <script src="site_libs/webcomponents-2.0.0/webcomponents.js"></script>
+  <script src="site_libs/distill-2.2.21/template.v2.js"></script>
+  <!--radix_placeholder_site_in_header-->
+  <!--/radix_placeholder_site_in_header-->
+
+
+</head>
+
+<body>
+
+<!--radix_placeholder_front_matter-->
+
+<script id="distill-front-matter" type="text/json">
+{"title":"Understanding Price","description":"An exploration of both new and used car sales in the United States","authors":[]}
+</script>
+
+<!--/radix_placeholder_front_matter-->
+<!--radix_placeholder_navigation_before_body-->
+<header class="header header--fixed" role="banner">
+<nav class="distill-site-nav distill-site-header">
+<div class="nav-left">
+<a href="index.html" class="title">Math 230: Data Visualization and Computing</a>
+</div>
+<div class="nav-right">
+<a href="index.html">Home</a>
+<div class="nav-dropdown">
+<button class="nav-dropbtn">
+Past Work
+ 
+<span class="down-arrow">&#x25BE;</span>
+</button>
+<div class="nav-dropdown-content">
+<a href="genArt.html">Generative Art</a>
+<a href="shiny.html">Confidence Interval Lesson</a>
+<a href="hsb2.html">HS&amp;B Survey Visualizatons</a>
+<a href="HERS.html">HERS Study Visualizations</a>
+<a href="misc.html">Miscillaneous</a>
+</div>
+</div>
+<div class="nav-dropdown">
+<button class="nav-dropbtn">
+Math 230 Final Project
+ 
+<span class="down-arrow">&#x25BE;</span>
+</button>
+<div class="nav-dropdown-content">
+<a href="story.html">Story Through Data</a>
+<a href="Infographic.html">Infographic</a>
+</div>
+</div>
+<a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
+</div>
+</nav>
+</header>
+<!--/radix_placeholder_navigation_before_body-->
+<!--radix_placeholder_site_before_body-->
+<!--/radix_placeholder_site_before_body-->
+
+<div class="d-title">
+<h1>Understanding Price</h1>
+
+<!--radix_placeholder_categories-->
+<!--/radix_placeholder_categories-->
+<p><p>An exploration of both new and used car sales in the United States</p></p>
+</div>
+
+
+<div class="d-article">
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<h2 id="understanding-price">Understanding Price</h2>
+<h1 id="a-car-price-guide-for-first-time-buyers">A Car Price Guide for First Time Buyers</h1>
+<p>When purchasing, or planning to purchase a new vehicle, it can be very important to understand what price you can expect based on what you want.
+This guide will explain how the price of cars is affected by a number of potential variables, including:</p>
+<ul>
+<li>Prior Use</li>
+<li>Price</li>
+<li>Manufacturer</li>
+<li>Color</li>
+<li>Interior Color</li>
+<li>Body Type</li>
+<li>Suggested price (MMR)</li>
+</ul>
+<p>To start, let’s address a few intuitive facts about car buying that basically explain themselves and don’t require extensive explanation:</p>
+<ul>
+<li>Most cars depreciate in value as they age, being at their peak at the year of their manufacture</li>
+<li>This effect is exacerbated by how much the car is used, meaning an unused car, even one manufactured several years ago, will generally have a greater value than a used car manufactured in the same year (I will explain this in more detail later).</li>
+</ul>
+<p>This guide uses data from 2014-2015 about dealership sales of both new and old cars in North America. While the below visualizations may not accurately represent modern prices, the relationships shown remain largely consistent.</p>
+<p>With that out of the way, below are some visualizations explaining how price is affected by a number of different variables. Some explanation is given for each, but it’s a good idea to consider what you are looking for and what you are able to pay for, comparing those to each graph shown.</p>
+<h3 id="body-type">Body Type</h3>
+<p>When purchasing a vehicle, one of the first things you should think about is the type of car you want. Sedan? Hatchback? Truck? If a truck, what kind of cab? The visualization below shows the price distribution of each body type. Note that there are many outlier points above the y-axis upper bound shown.</p>
+<div class="layout-chunk" data-layout="l-body">
+<p><img src="story_files/figure-html5/unnamed-chunk-9-1.png" width="624" /></p>
+</div>
+<h3 id="manufacturer">Manufacturer</h3>
+<p>While you may have your heart set on a certain manufacturer, keep in mind that price distribution varies significantly from one to another, and some manufacturers are generally considered more expensive than others. The graph below provides an understanding of the price distribution available for essentially all the top car manufacturers.</p>
+<div class="layout-chunk" data-layout="l-body">
+<p><img src="story_files/figure-html5/unnamed-chunk-10-1.png" width="624" /></p>
+</div>
+<h3 id="condition">Condition</h3>
+<p>The below graph shows the relationship between how many miles the car has traveled in it’s lifetime and its sale price. The sample was derived from a collection of used and new cars.</p>
+<div class="layout-chunk" data-layout="l-body">
+<p><img src="story_files/figure-html5/unnamed-chunk-11-1.png" width="624" /></p>
+</div>
+<h3 id="suggested-price">Suggested Price</h3>
+<p>The MMR is a price index used to estimate the value of a car based on several factors. Generally, cars are sold for around their suggested price, although there can be deviation for several factors, including manufacturer. For the sake of examination, this graph includes the manufacturer of each car to show their deviation.</p>
+<div class="layout-chunk" data-layout="l-body">
+<p><img src="story_files/figure-html5/unnamed-chunk-12-1.png" width="624" /></p>
+</div>
+<h3 id="color">Color</h3>
+<p>While not always that important, some car colors tend to be consistently more expensive than others. This visualizations shows the sale price distributions of cars based on their color.</p>
+<div class="layout-chunk" data-layout="l-body">
+<p><img src="story_files/figure-html5/unnamed-chunk-13-1.png" width="624" /></p>
+</div>
+<h3 id="transmission">Transmission</h3>
+<p>When purchasing a vehicle it is important to know whether you want an automatic or manual, especially considering your driving ability. The distributions below show what you can expect from prices from each.</p>
+<div class="layout-chunk" data-layout="l-body">
+<p><img src="story_files/figure-html5/unnamed-chunk-14-1.png" width="624" /></p>
+</div>
+<p>Notice how median price for a manual is a bit lower? This is likely due to an greater number of the manuals being sold and being older, due to their share of vehicle production decreasing over the years. Below is a second visualization showing this trend in more detail across different production years.</p>
+<div class="layout-chunk" data-layout="l-body">
+<p><img src="story_files/figure-html5/unnamed-chunk-15-1.png" width="624" /></p>
+</div>
+<h3 id="interior-color">Interior Color</h3>
+<p>Interior color and upholstery can have a significant effect on price. The visualization below shows price distribution based on interior color.</p>
+<div class="layout-chunk" data-layout="l-body">
+<p><img src="story_files/figure-html5/unnamed-chunk-16-1.png" width="624" /></p>
+</div>
+<h3 id="color-breakdown">Color Breakdown</h3>
+<p>Ever wondered if you’ll be able to find the interior color you want with the exterior color you want? The graph below shows the proportional breakdown of each exterior color. This way you can examine the likelihood you’ll be able to find a car you want.</p>
+<div class="layout-chunk" data-layout="l-body">
+<p><img src="story_files/figure-html5/unnamed-chunk-17-1.png" width="624" /></p>
+</div>
+<h3 id="final-summary">Final Summary</h3>
+<p>The plot below allows you to compare exact cars to each other to get an idea for how different factors play into a vehicle’s final price.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="plotly html-widget html-fill-item" id="htmlwidget-7a74a7259d69c7e482b6" style="width:624px;height:384px;"></div>
+<script type="application/json" data-for="htmlwidget-7a74a7259d69c7e482b6">{"x":{"data":[{"x":[2007],"y":[7900],"text":"year: 2007<br />sellingprice:  7900<br />MMRError: -0.189743590<br />body: SUV<br />make: GMC<br />color: beige","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(79,148,205,1)","opacity":0.40000000000000002,"size":6.9044639347572883,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(79,148,205,1)"}},"hoveron":"points","name":"(beige,SUV,GMC)","legendgroup":"(beige,SUV,GMC)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2013],"y":[23300],"text":"year: 2013<br />sellingprice: 23300<br />MMRError: -0.021008403<br />body: Access Cab<br />make: Toyota<br />color: black","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(64,224,208,1)","opacity":0.96666666666666667,"size":7.8705393291650472,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(64,224,208,1)"}},"hoveron":"points","name":"(black,Access Cab,Toyota)","legendgroup":"(black,Access Cab,Toyota)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2013],"y":[13000],"text":"year: 2013<br />sellingprice: 13000<br />MMRError: -0.078014184<br />body: Convertible<br />make: Hyundai<br />color: black","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(64,224,208,1)","opacity":0.46666666666666667,"size":7.5580530537402426,"symbol":"triangle-up","line":{"width":1.8897637795275593,"color":"rgba(64,224,208,1)"}},"hoveron":"points","name":"(black,Convertible,Hyundai)","legendgroup":"(black,Convertible,Hyundai)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2014],"y":[28800],"text":"year: 2014<br />sellingprice: 28800<br />MMRError:  0.000000000<br />body: Convertible<br />make: Infiniti<br />color: black","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(64,224,208,1)","opacity":0.5,"size":7.9826014467832289,"symbol":"triangle-up","line":{"width":1.8897637795275593,"color":"rgba(64,224,208,1)"}},"hoveron":"points","name":"(black,Convertible,Infiniti)","legendgroup":"(black,Convertible,Infiniti)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2014],"y":[22500],"text":"year: 2014<br />sellingprice: 22500<br />MMRError:  0.046511628<br />body: Coupe<br />make: Ford<br />color: black","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(64,224,208,1)","opacity":0.3666666666666667,"size":8.2252466676713674,"symbol":"square","line":{"width":1.8897637795275593,"color":"rgba(64,224,208,1)"}},"hoveron":"points","name":"(black,Coupe,Ford)","legendgroup":"(black,Coupe,Ford)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2013],"y":[13000],"text":"year: 2013<br />sellingprice: 13000<br />MMRError:  0.048387097<br />body: Coupe<br />make: Honda<br />color: black","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(64,224,208,1)","opacity":0.43333333333333335,"size":8.2348801001035508,"symbol":"square","line":{"width":1.8897637795275593,"color":"rgba(64,224,208,1)"}},"hoveron":"points","name":"(black,Coupe,Honda)","legendgroup":"(black,Coupe,Honda)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2013,2011,2011],"y":[26750,16800,17600],"text":["year: 2013<br />sellingprice: 26750<br />MMRError: -0.016544118<br />body: Coupe<br />make: Infiniti<br />color: black","year: 2011<br />sellingprice: 16800<br />MMRError: -0.129533679<br />body: Coupe<br />make: Infiniti<br />color: black","year: 2011<br />sellingprice: 17600<br />MMRError:  0.000000000<br />body: Coupe<br />make: Infiniti<br />color: black"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(64,224,208,1)","opacity":0.5,"size":[7.8944862691146209,7.2640252868701358,7.9826014467832289],"symbol":"square","line":{"width":1.8897637795275593,"color":"rgba(64,224,208,1)"}},"hoveron":"points","name":"(black,Coupe,Infiniti)","legendgroup":"(black,Coupe,Infiniti)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2006],"y":[10200],"text":"year: 2006<br />sellingprice: 10200<br />MMRError: -0.037735849<br />body: Crew Cab<br />make: Chevrolet<br />color: black","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(64,224,208,1)","opacity":0.26666666666666666,"size":7.7801527204255061,"symbol":"cross-thin-open","line":{"width":1.8897637795275593,"color":"rgba(64,224,208,1)"}},"hoveron":"points","name":"(black,Crew Cab,Chevrolet)","legendgroup":"(black,Crew Cab,Chevrolet)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2008],"y":[22000],"text":"year: 2008<br />sellingprice: 22000<br />MMRError: -0.185185185<br />body: Crew Cab<br />make: Ford<br />color: black","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(64,224,208,1)","opacity":0.3666666666666667,"size":6.9323419226681953,"symbol":"cross-thin-open","line":{"width":1.8897637795275593,"color":"rgba(64,224,208,1)"}},"hoveron":"points","name":"(black,Crew Cab,Ford)","legendgroup":"(black,Crew Cab,Ford)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2012],"y":[22500],"text":"year: 2012<br />sellingprice: 22500<br />MMRError: -0.141221374<br />body: Wagon<br />make: Ford<br />color: black","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(64,224,208,1)","opacity":0.3666666666666667,"size":7.1956416413587796,"symbol":"square-x-open","line":{"width":1.8897637795275593,"color":"rgba(64,224,208,1)"}},"hoveron":"points","name":"(black,Wagon,Ford)","legendgroup":"(black,Wagon,Ford)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2012],"y":[18300],"text":"year: 2012<br />sellingprice: 18300<br />MMRError:  0.028089888<br />body: Sedan<br />make: Acura<br />color: black","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(64,224,208,1)","opacity":0.10000000000000001,"size":8.1300130176795573,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(64,224,208,1)"}},"hoveron":"points","name":"(black,Sedan,Acura)","legendgroup":"(black,Sedan,Acura)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2012],"y":[24400],"text":"year: 2012<br />sellingprice: 24400<br />MMRError:  0.047210300<br />body: Sedan<br />make: Audi<br />color: black","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(64,224,208,1)","opacity":0.13333333333333333,"size":8.2288367555252151,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(64,224,208,1)"}},"hoveron":"points","name":"(black,Sedan,Audi)","legendgroup":"(black,Sedan,Audi)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2008],"y":[10000],"text":"year: 2008<br />sellingprice: 10000<br />MMRError: -0.095022624<br />body: Sedan<br />make: Cadillac<br />color: black","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(64,224,208,1)","opacity":0.23333333333333334,"size":7.4622715521608516,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(64,224,208,1)"}},"hoveron":"points","name":"(black,Sedan,Cadillac)","legendgroup":"(black,Sedan,Cadillac)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2008],"y":[800],"text":"year: 2008<br />sellingprice:   800<br />MMRError: -0.726495726<br />body: Sedan<br />make: Chevrolet<br />color: black","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(64,224,208,1)","opacity":0.26666666666666666,"size":1.4442510827663615,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(64,224,208,1)"}},"hoveron":"points","name":"(black,Sedan,Chevrolet)","legendgroup":"(black,Sedan,Chevrolet)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2013,2013],"y":[15000,18800],"text":["year: 2013<br />sellingprice: 15000<br />MMRError:  0.010101010<br />body: Sedan<br />make: Dodge<br />color: black","year: 2013<br />sellingprice: 18800<br />MMRError: -0.013123360<br />body: Sedan<br />make: Dodge<br />color: black"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(64,224,208,1)","opacity":0.33333333333333337,"size":[8.0359228920079673,7.9127863305843311],"symbol":[null,null],"line":{"width":1.8897637795275593,"color":"rgba(64,224,208,1)"}},"hoveron":"points","name":"(black,Sedan,Dodge)","legendgroup":"(black,Sedan,Dodge)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2012,2003,2012],"y":[11000,3800,13100],"text":["year: 2012<br />sellingprice: 11000<br />MMRError: -0.059829060<br />body: Sedan<br />make: Honda<br />color: black","year: 2003<br />sellingprice:  3800<br />MMRError:  0.266666667<br />body: Sedan<br />make: Honda<br />color: black","year: 2012<br />sellingprice: 13100<br />MMRError:  0.011583012<br />body: Sedan<br />make: Honda<br />color: black"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(64,224,208,1)","opacity":0.43333333333333335,"size":[7.6591295290050105,9.2878002617358693,8.0437162410221603],"symbol":[null,null,null],"line":{"width":1.8897637795275593,"color":"rgba(64,224,208,1)"}},"hoveron":"points","name":"(black,Sedan,Honda)","legendgroup":"(black,Sedan,Honda)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2014],"y":[14300],"text":"year: 2014<br />sellingprice: 14300<br />MMRError: -0.030508475<br />body: Sedan<br />make: Kia<br />color: black","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(64,224,208,1)","opacity":0.56666666666666665,"size":7.8193345905841616,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(64,224,208,1)"}},"hoveron":"points","name":"(black,Sedan,Kia)","legendgroup":"(black,Sedan,Kia)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2012],"y":[23400],"text":"year: 2012<br />sellingprice: 23400<br />MMRError:  0.021834061<br />body: Sedan<br />make: Lexus<br />color: black","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(64,224,208,1)","opacity":0.59999999999999998,"size":8.0974167359730025,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(64,224,208,1)"}},"hoveron":"points","name":"(black,Sedan,Lexus)","legendgroup":"(black,Sedan,Lexus)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2007],"y":[6100],"text":"year: 2007<br />sellingprice:  6100<br />MMRError:  0.410404624<br />body: Sedan<br />make: Pontiac<br />color: black","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(64,224,208,1)","opacity":0.83333333333333326,"size":9.9200808530367564,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(64,224,208,1)"}},"hoveron":"points","name":"(black,Sedan,Pontiac)","legendgroup":"(black,Sedan,Pontiac)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2006],"y":[6700],"text":"year: 2006<br />sellingprice:  6700<br />MMRError:  0.034749035<br />body: Sedan<br />make: Subaru<br />color: black","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(64,224,208,1)","opacity":0.90000000000000002,"size":8.1645671635279573,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(64,224,208,1)"}},"hoveron":"points","name":"(black,Sedan,Subaru)","legendgroup":"(black,Sedan,Subaru)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2005],"y":[700],"text":"year: 2005<br />sellingprice:   700<br />MMRError: -0.391304348<br />body: Sedan<br />make: Suzuki<br />color: black","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(64,224,208,1)","opacity":0.93333333333333335,"size":5.5321378049012928,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(64,224,208,1)"}},"hoveron":"points","name":"(black,Sedan,Suzuki)","legendgroup":"(black,Sedan,Suzuki)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2011],"y":[11800],"text":"year: 2011<br />sellingprice: 11800<br />MMRError: -0.020746888<br />body: Sedan<br />make: Toyota<br />color: black","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(64,224,208,1)","opacity":0.96666666666666667,"size":7.8719441460976336,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(64,224,208,1)"}},"hoveron":"points","name":"(black,Sedan,Toyota)","legendgroup":"(black,Sedan,Toyota)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2014],"y":[18800],"text":"year: 2014<br />sellingprice: 18800<br />MMRError: -0.033419023<br />body: Sedan<br />make: Volkswagen<br />color: black","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(64,224,208,1)","opacity":1,"size":7.8035793671710181,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(64,224,208,1)"}},"hoveron":"points","name":"(black,Sedan,Volkswagen)","legendgroup":"(black,Sedan,Volkswagen)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2006],"y":[9700],"text":"year: 2006<br />sellingprice:  9700<br />MMRError:  0.172205438<br />body: Hatchback<br />make: Nissan<br />color: black","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(64,224,208,1)","opacity":0.79999999999999993,"size":8.8476047036971899,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(64,224,208,1)"}},"hoveron":"points","name":"(black,Hatchback,Nissan)","legendgroup":"(black,Hatchback,Nissan)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2014],"y":[16400],"text":"year: 2014<br />sellingprice: 16400<br />MMRError:  0.047923323<br />body: Mega Cab<br />make: Dodge<br />color: black","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(64,224,208,1)","opacity":0.33333333333333337,"size":8.2324989570396543,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(64,224,208,1)"}},"hoveron":"points","name":"(black,Mega Cab,Dodge)","legendgroup":"(black,Mega Cab,Dodge)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2012],"y":[9000],"text":"year: 2012<br />sellingprice:  9000<br />MMRError: -0.146919431<br />body: Mega Cab<br />make: Kia<br />color: black","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(64,224,208,1)","opacity":0.56666666666666665,"size":7.1620648182354332,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(64,224,208,1)"}},"hoveron":"points","name":"(black,Mega Cab,Kia)","legendgroup":"(black,Mega Cab,Kia)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2012,2011],"y":[8500,7400],"text":["year: 2012<br />sellingprice:  8500<br />MMRError: -0.034090909<br />body: Regular Cab<br />make: Nissan<br />color: black","year: 2011<br />sellingprice:  7400<br />MMRError: -0.060317460<br />body: Regular Cab<br />make: Nissan<br />color: black"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(64,224,208,1)","opacity":0.79999999999999993,"size":[7.7999378074102239,7.6564324275303326],"symbol":[null,null],"line":{"width":1.8897637795275593,"color":"rgba(64,224,208,1)"}},"hoveron":"points","name":"(black,Regular Cab,Nissan)","legendgroup":"(black,Regular Cab,Nissan)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2004],"y":[5000],"text":"year: 2004<br />sellingprice:  5000<br />MMRError:  0.183431953<br />body: Regular Cab<br />make: Pontiac<br />color: black","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(64,224,208,1)","opacity":0.83333333333333326,"size":8.9010658235409021,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(64,224,208,1)"}},"hoveron":"points","name":"(black,Regular Cab,Pontiac)","legendgroup":"(black,Regular Cab,Pontiac)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2012],"y":[29000],"text":"year: 2012<br />sellingprice: 29000<br />MMRError: -0.023569024<br />body: SuperCrew<br />make: BMW<br />color: black","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(64,224,208,1)","opacity":0.16666666666666669,"size":7.8567707711125312,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(64,224,208,1)"}},"hoveron":"points","name":"(black,SuperCrew,BMW)","legendgroup":"(black,SuperCrew,BMW)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2014],"y":[18500],"text":"year: 2014<br />sellingprice: 18500<br />MMRError: -0.026315789<br />body: SuperCrew<br />make: Chevrolet<br />color: black","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(64,224,208,1)","opacity":0.26666666666666666,"size":7.8419742959685586,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(64,224,208,1)"}},"hoveron":"points","name":"(black,SuperCrew,Chevrolet)","legendgroup":"(black,SuperCrew,Chevrolet)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2013],"y":[32500],"text":"year: 2013<br />sellingprice: 32500<br />MMRError:  0.025236593<br />body: SuperCrew<br />make: Lexus<br />color: black","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(64,224,208,1)","opacity":0.59999999999999998,"size":8.1151621065790742,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(64,224,208,1)"}},"hoveron":"points","name":"(black,SuperCrew,Lexus)","legendgroup":"(black,SuperCrew,Lexus)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2014],"y":[33500],"text":"year: 2014<br />sellingprice: 33500<br />MMRError:  0.147260274<br />body: SuperCrew<br />make: Toyota<br />color: black","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(64,224,208,1)","opacity":0.96666666666666667,"size":8.7276375627368274,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(64,224,208,1)"}},"hoveron":"points","name":"(black,SuperCrew,Toyota)","legendgroup":"(black,SuperCrew,Toyota)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2012],"y":[27200],"text":"year: 2012<br />sellingprice: 27200<br />MMRError:  0.018726592<br />body: SUV<br />make: Audi<br />color: black","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(64,224,208,1)","opacity":0.13333333333333333,"size":8.0811760131614836,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(64,224,208,1)"}},"hoveron":"points","name":"(black,SUV,Audi)","legendgroup":"(black,SUV,Audi)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2010,2013,2011,2002],"y":[13000,21500,17250,2100],"text":["year: 2010<br />sellingprice: 13000<br />MMRError: -0.153094463<br />body: SUV<br />make: Chevrolet<br />color: black","year: 2013<br />sellingprice: 21500<br />MMRError:  0.004672897<br />body: SUV<br />make: Chevrolet<br />color: black","year: 2011<br />sellingprice: 17250<br />MMRError:  0.236559140<br />body: SUV<br />make: Chevrolet<br />color: black","year: 2002<br />sellingprice:  2100<br />MMRError:  0.000000000<br />body: SUV<br />make: Chevrolet<br />color: black"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(64,224,208,1)","opacity":0.26666666666666666,"size":[7.1254977479968185,8.0073131897299596,9.1498063041893474,7.9826014467832289],"symbol":[null,null,null,null],"line":{"width":1.8897637795275593,"color":"rgba(64,224,208,1)"}},"hoveron":"points","name":"(black,SUV,Chevrolet)","legendgroup":"(black,SUV,Chevrolet)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2006],"y":[3200],"text":"year: 2006<br />sellingprice:  3200<br />MMRError: -0.384615385<br />body: SUV<br />make: Ford<br />color: black","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(64,224,208,1)","opacity":0.3666666666666667,"size":5.5831304758786224,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(64,224,208,1)"}},"hoveron":"points","name":"(black,SUV,Ford)","legendgroup":"(black,SUV,Ford)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2007],"y":[5700],"text":"year: 2007<br />sellingprice:  5700<br />MMRError: -0.155555556<br />body: SUV<br />make: Jeep<br />color: black","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(64,224,208,1)","opacity":0.53333333333333333,"size":7.1108710513322659,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(64,224,208,1)"}},"hoveron":"points","name":"(black,SUV,Jeep)","legendgroup":"(black,SUV,Jeep)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2009],"y":[8000],"text":"year: 2009<br />sellingprice:  8000<br />MMRError:  0.203007519<br />body: SUV<br />make: Kia<br />color: black","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(64,224,208,1)","opacity":0.56666666666666665,"size":8.9935221036618493,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(64,224,208,1)"}},"hoveron":"points","name":"(black,SUV,Kia)","legendgroup":"(black,SUV,Kia)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2002],"y":[4500],"text":"year: 2002<br />sellingprice:  4500<br />MMRError:  0.176470588<br />body: SUV<br />make: Mercedes-Benz<br />color: black","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(64,224,208,1)","opacity":0.66666666666666663,"size":8.8679536482101433,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(64,224,208,1)"}},"hoveron":"points","name":"(black,SUV,Mercedes-Benz)","legendgroup":"(black,SUV,Mercedes-Benz)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2004],"y":[4200],"text":"year: 2004<br />sellingprice:  4200<br />MMRError:  0.112582781<br />body: SUV<br />make: Mercury<br />color: black","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(64,224,208,1)","opacity":0.69999999999999996,"size":8.5580595757077607,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(64,224,208,1)"}},"hoveron":"points","name":"(black,SUV,Mercury)","legendgroup":"(black,SUV,Mercury)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2012],"y":[16500],"text":"year: 2012<br />sellingprice: 16500<br />MMRError:  0.028037383<br />body: SUV<br />make: Nissan<br />color: black","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(64,224,208,1)","opacity":0.79999999999999993,"size":8.1297399870692217,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(64,224,208,1)"}},"hoveron":"points","name":"(black,SUV,Nissan)","legendgroup":"(black,SUV,Nissan)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2006],"y":[4200],"text":"year: 2006<br />sellingprice:  4200<br />MMRError:  0.423728814<br />body: SUV<br />make: Saturn<br />color: black","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(64,224,208,1)","opacity":0.86666666666666659,"size":9.9766549198753864,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(64,224,208,1)"}},"hoveron":"points","name":"(black,SUV,Saturn)","legendgroup":"(black,SUV,Saturn)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2012],"y":[6200],"text":"year: 2012<br />sellingprice:  6200<br />MMRError: -0.212698413<br />body: Convertible<br />make: Ford<br />color: blue","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(99,184,255,1)","opacity":0.3666666666666667,"size":6.7623221924274919,"symbol":"triangle-up","line":{"width":1.8897637795275593,"color":"rgba(99,184,255,1)"}},"hoveron":"points","name":"(blue,Convertible,Ford)","legendgroup":"(blue,Convertible,Ford)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2014],"y":[43500],"text":"year: 2014<br />sellingprice: 43500<br />MMRError: -0.011363636<br />body: Coupe<br />make: BMW<br />color: blue","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(99,184,255,1)","opacity":0.16666666666666669,"size":7.9221837929905403,"symbol":"square","line":{"width":1.8897637795275593,"color":"rgba(99,184,255,1)"}},"hoveron":"points","name":"(blue,Coupe,BMW)","legendgroup":"(blue,Coupe,BMW)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2012],"y":[22200],"text":"year: 2012<br />sellingprice: 22200<br />MMRError: -0.013333333<br />body: Ext Cab<br />make: GMC<br />color: blue","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(99,184,255,1)","opacity":0.40000000000000002,"size":7.9116642572619273,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(99,184,255,1)"}},"hoveron":"points","name":"(blue,Ext Cab,GMC)","legendgroup":"(blue,Ext Cab,GMC)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2010],"y":[9500],"text":"year: 2010<br />sellingprice:  9500<br />MMRError: -0.037974684<br />body: Sedan<br />make: Audi<br />color: blue","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(99,184,255,1)","opacity":0.13333333333333333,"size":7.7788545384169101,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(99,184,255,1)"}},"hoveron":"points","name":"(blue,Sedan,Audi)","legendgroup":"(blue,Sedan,Audi)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2011],"y":[7000],"text":"year: 2011<br />sellingprice:  7000<br />MMRError: -0.090909091<br />body: Sedan<br />make: Ford<br />color: blue","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(99,184,255,1)","opacity":0.3666666666666667,"size":7.4855494781486414,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(99,184,255,1)"}},"hoveron":"points","name":"(blue,Sedan,Ford)","legendgroup":"(blue,Sedan,Ford)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2001],"y":[1700],"text":"year: 2001<br />sellingprice:  1700<br />MMRError: -0.260869565<br />body: Sedan<br />make: Honda<br />color: blue","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(99,184,255,1)","opacity":0.43333333333333335,"size":6.4538050624857979,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(99,184,255,1)"}},"hoveron":"points","name":"(blue,Sedan,Honda)","legendgroup":"(blue,Sedan,Honda)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2005,2009],"y":[1800,6900],"text":["year: 2005<br />sellingprice:  1800<br />MMRError: -0.152941176<br />body: Sedan<br />make: Hyundai<br />color: blue","year: 2009<br />sellingprice:  6900<br />MMRError:  0.126530612<br />body: Sedan<br />make: Hyundai<br />color: blue"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(99,184,255,1)","opacity":0.46666666666666667,"size":[7.126407754898116,8.626669017935555],"symbol":[null,null],"line":{"width":1.8897637795275593,"color":"rgba(99,184,255,1)"}},"hoveron":"points","name":"(blue,Sedan,Hyundai)","legendgroup":"(blue,Sedan,Hyundai)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2014],"y":[16100],"text":"year: 2014<br />sellingprice: 16100<br />MMRError: -0.061224490<br />body: Sedan<br />make: Kia<br />color: blue","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(99,184,255,1)","opacity":0.56666666666666665,"size":7.6514209899534036,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(99,184,255,1)"}},"hoveron":"points","name":"(blue,Sedan,Kia)","legendgroup":"(blue,Sedan,Kia)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2011,2014],"y":[26800,21000],"text":["year: 2011<br />sellingprice: 26800<br />MMRError:  0.085020243<br />body: Sedan<br />make: Subaru<br />color: blue","year: 2014<br />sellingprice: 21000<br />MMRError: -0.004739336<br />body: Sedan<br />make: Subaru<br />color: blue"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(99,184,255,1)","opacity":0.90000000000000002,"size":[8.4208282898293216,7.9574595920570461],"symbol":[null,null],"line":{"width":1.8897637795275593,"color":"rgba(99,184,255,1)"}},"hoveron":"points","name":"(blue,Sedan,Subaru)","legendgroup":"(blue,Sedan,Subaru)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2012],"y":[8900],"text":"year: 2012<br />sellingprice:  8900<br />MMRError: -0.148325359<br />body: Sedan<br />make: Toyota<br />color: blue","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(99,184,255,1)","opacity":0.96666666666666667,"size":7.1537557697692149,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(99,184,255,1)"}},"hoveron":"points","name":"(blue,Sedan,Toyota)","legendgroup":"(blue,Sedan,Toyota)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2014],"y":[19200],"text":"year: 2014<br />sellingprice: 19200<br />MMRError:  0.005235602<br />body: Mega Cab<br />make: Dodge<br />color: blue","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(99,184,255,1)","opacity":0.33333333333333337,"size":8.0102837821242083,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(99,184,255,1)"}},"hoveron":"points","name":"(blue,Mega Cab,Dodge)","legendgroup":"(blue,Mega Cab,Dodge)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2005],"y":[5500],"text":"year: 2005<br />sellingprice:  5500<br />MMRError:  0.410256410<br />body: Regular Cab<br />make: Chevrolet<br />color: blue","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(99,184,255,1)","opacity":0.26666666666666666,"size":9.9194497197127323,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(99,184,255,1)"}},"hoveron":"points","name":"(blue,Regular Cab,Chevrolet)","legendgroup":"(blue,Regular Cab,Chevrolet)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2004],"y":[2500],"text":"year: 2004<br />sellingprice:  2500<br />MMRError: -0.166666667<br />body: SuperCrew<br />make: Jeep<br />color: blue","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(99,184,255,1)","opacity":0.53333333333333333,"size":7.0444557234529093,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(99,184,255,1)"}},"hoveron":"points","name":"(blue,SuperCrew,Jeep)","legendgroup":"(blue,SuperCrew,Jeep)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2003],"y":[5100],"text":"year: 2003<br />sellingprice:  5100<br />MMRError:  0.619047619<br />body: SUV<br />make: Ford<br />color: blue","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(99,184,255,1)","opacity":0.3666666666666667,"size":10.771804191218708,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(99,184,255,1)"}},"hoveron":"points","name":"(blue,SUV,Ford)","legendgroup":"(blue,SUV,Ford)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2012],"y":[22700],"text":"year: 2012<br />sellingprice: 22700<br />MMRError: -0.065843621<br />body: SUV<br />make: Honda<br />color: blue","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(99,184,255,1)","opacity":0.43333333333333335,"size":7.6258484343929362,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(99,184,255,1)"}},"hoveron":"points","name":"(blue,SUV,Honda)","legendgroup":"(blue,SUV,Honda)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2007],"y":[4200],"text":"year: 2007<br />sellingprice:  4200<br />MMRError: -0.314285714<br />body: SUV<br />make: Hyundai<br />color: blue","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(99,184,255,1)","opacity":0.46666666666666667,"size":6.0933449938376745,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(99,184,255,1)"}},"hoveron":"points","name":"(blue,SUV,Hyundai)","legendgroup":"(blue,SUV,Hyundai)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2012],"y":[23100],"text":"year: 2012<br />sellingprice: 23100<br />MMRError:  0.022123894<br />body: SUV<br />make: Jeep<br />color: blue","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(99,184,255,1)","opacity":0.53333333333333333,"size":8.0989298347542178,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(99,184,255,1)"}},"hoveron":"points","name":"(blue,SUV,Jeep)","legendgroup":"(blue,SUV,Jeep)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2005],"y":[5700],"text":"year: 2005<br />sellingprice:  5700<br />MMRError:  0.017857143<br />body: SUV<br />make: Kia<br />color: blue","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(99,184,255,1)","opacity":0.56666666666666665,"size":8.0766260944026786,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(99,184,255,1)"}},"hoveron":"points","name":"(blue,SUV,Kia)","legendgroup":"(blue,SUV,Kia)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2014],"y":[22100],"text":"year: 2014<br />sellingprice: 22100<br />MMRError:  0.037558685<br />body: SUV<br />make: Subaru<br />color: blue","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(99,184,255,1)","opacity":0.90000000000000002,"size":8.1791023767600244,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(99,184,255,1)"}},"hoveron":"points","name":"(blue,SUV,Subaru)","legendgroup":"(blue,SUV,Subaru)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2009],"y":[11000],"text":"year: 2009<br />sellingprice: 11000<br />MMRError: -0.130434783<br />body: Convertible<br />make: Mini<br />color: brown","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(56,192,147,1)","opacity":0.73333333333333328,"size":7.2587760498121821,"symbol":"triangle-up","line":{"width":1.8897637795275593,"color":"rgba(56,192,147,1)"}},"hoveron":"points","name":"(brown,Convertible,Mini)","legendgroup":"(brown,Convertible,Mini)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2006],"y":[5900],"text":"year: 2006<br />sellingprice:  5900<br />MMRError:  0.151219512<br />body: Sedan<br />make: Chevrolet<br />color: brown","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(56,192,147,1)","opacity":0.26666666666666666,"size":8.7467887980623136,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(56,192,147,1)"}},"hoveron":"points","name":"(brown,Sedan,Chevrolet)","legendgroup":"(brown,Sedan,Chevrolet)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2012],"y":[17300],"text":"year: 2012<br />sellingprice: 17300<br />MMRError: -0.044198895<br />body: SUV<br />make: Honda<br />color: brown","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(56,192,147,1)","opacity":0.43333333333333335,"size":7.7449458079068805,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(56,192,147,1)"}},"hoveron":"points","name":"(brown,SUV,Honda)","legendgroup":"(brown,SUV,Honda)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2008],"y":[17400],"text":"year: 2008<br />sellingprice: 17400<br />MMRError:  0.247311828<br />body: Ext Cab<br />make: Chevrolet<br />color: burgundy","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(173,216,230,1)","opacity":0.26666666666666666,"size":9.1993284679518155,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(173,216,230,1)"}},"hoveron":"points","name":"(burgundy,Ext Cab,Chevrolet)","legendgroup":"(burgundy,Ext Cab,Chevrolet)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2013],"y":[12600],"text":"year: 2013<br />sellingprice: 12600<br />MMRError: -0.056179775<br />body: Sedan<br />make: Ford<br />color: burgundy","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(173,216,230,1)","opacity":0.3666666666666667,"size":7.6792518986895484,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(173,216,230,1)"}},"hoveron":"points","name":"(burgundy,Sedan,Ford)","legendgroup":"(burgundy,Sedan,Ford)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2013,2008],"y":[8400,4900],"text":["year: 2013<br />sellingprice:  8400<br />MMRError: -0.028901734<br />body: Sedan<br />make: Nissan<br />color: burgundy","year: 2008<br />sellingprice:  4900<br />MMRError:  0.101123596<br />body: Sedan<br />make: Nissan<br />color: burgundy"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(173,216,230,1)","opacity":0.79999999999999993,"size":[7.8280184605394654,8.5012756172132029],"symbol":[null,null],"line":{"width":1.8897637795275593,"color":"rgba(173,216,230,1)"}},"hoveron":"points","name":"(burgundy,Sedan,Nissan)","legendgroup":"(burgundy,Sedan,Nissan)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2005],"y":[3500],"text":"year: 2005<br />sellingprice:  3500<br />MMRError: -0.027777778<br />body: SUV<br />make: Hyundai<br />color: burgundy","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(173,216,230,1)","opacity":0.46666666666666667,"size":7.8340873015127119,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(173,216,230,1)"}},"hoveron":"points","name":"(burgundy,SUV,Hyundai)","legendgroup":"(burgundy,SUV,Hyundai)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2007],"y":[6400],"text":"year: 2007<br />sellingprice:  6400<br />MMRError: -0.055350554<br />body: SUV<br />make: Jeep<br />color: burgundy","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(173,216,230,1)","opacity":0.53333333333333333,"size":7.6838168925242041,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(173,216,230,1)"}},"hoveron":"points","name":"(burgundy,SUV,Jeep)","legendgroup":"(burgundy,SUV,Jeep)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2012],"y":[7300],"text":"year: 2012<br />sellingprice:  7300<br />MMRError:  0.089552239<br />body: Mega Cab<br />make: Dodge<br />color: charcoal","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(48,255,186,1)","opacity":0.33333333333333337,"size":8.4435465781361874,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(48,255,186,1)"}},"hoveron":"points","name":"(charcoal,Mega Cab,Dodge)","legendgroup":"(charcoal,Mega Cab,Dodge)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2008],"y":[3050],"text":"year: 2008<br />sellingprice:  3050<br />MMRError:  0.051724138<br />body: Wagon<br />make: Chevrolet<br />color: gold","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,0,205,1)","opacity":0.26666666666666666,"size":8.2519930306814224,"symbol":"square-x-open","line":{"width":1.8897637795275593,"color":"rgba(0,0,205,1)"}},"hoveron":"points","name":"(gold,Wagon,Chevrolet)","legendgroup":"(gold,Wagon,Chevrolet)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1995],"y":[250],"text":"year: 1995<br />sellingprice:   250<br />MMRError: -0.333333333<br />body: Sedan<br />make: Buick<br />color: gold","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,0,205,1)","opacity":0.20000000000000001,"size":5.959504164539438,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(0,0,205,1)"}},"hoveron":"points","name":"(gold,Sedan,Buick)","legendgroup":"(gold,Sedan,Buick)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2002],"y":[2150],"text":"year: 2002<br />sellingprice:  2150<br />MMRError:  0.653846154<br />body: Sedan<br />make: Ford<br />color: gold","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,0,205,1)","opacity":0.3666666666666667,"size":10.907367003219733,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(0,0,205,1)"}},"hoveron":"points","name":"(gold,Sedan,Ford)","legendgroup":"(gold,Sedan,Ford)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2006],"y":[5000],"text":"year: 2006<br />sellingprice:  5000<br />MMRError:  0.212121212<br />body: Regular Cab<br />make: Hyundai<br />color: gold","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,0,205,1)","opacity":0.46666666666666667,"size":9.0362424072935266,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(0,0,205,1)"}},"hoveron":"points","name":"(gold,Regular Cab,Hyundai)","legendgroup":"(gold,Regular Cab,Hyundai)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2007],"y":[13500],"text":"year: 2007<br />sellingprice: 13500<br />MMRError:  0.129707113<br />body: SuperCrew<br />make: Cadillac<br />color: gold","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,0,205,1)","opacity":0.23333333333333334,"size":8.6422177565301528,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(0,0,205,1)"}},"hoveron":"points","name":"(gold,SuperCrew,Cadillac)","legendgroup":"(gold,SuperCrew,Cadillac)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2009],"y":[10900],"text":"year: 2009<br />sellingprice: 10900<br />MMRError: -0.004566210<br />body: SuperCrew<br />make: Ford<br />color: gold","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,0,205,1)","opacity":0.3666666666666667,"size":7.9583794203767289,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(0,0,205,1)"}},"hoveron":"points","name":"(gold,SuperCrew,Ford)","legendgroup":"(gold,SuperCrew,Ford)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2004],"y":[3500],"text":"year: 2004<br />sellingprice:  3500<br />MMRError: -0.222222222<br />body: SUV<br />make: Acura<br />color: gold","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,0,205,1)","opacity":0.10000000000000001,"size":6.7024587436818885,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(0,0,205,1)"}},"hoveron":"points","name":"(gold,SUV,Acura)","legendgroup":"(gold,SUV,Acura)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2007],"y":[7700],"text":"year: 2007<br />sellingprice:  7700<br />MMRError: -0.003236246<br />body: SUV<br />make: Ford<br />color: gold","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,0,205,1)","opacity":0.3666666666666667,"size":7.9654420181729249,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(0,0,205,1)"}},"hoveron":"points","name":"(gold,SUV,Ford)","legendgroup":"(gold,SUV,Ford)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2012],"y":[33700],"text":"year: 2012<br />sellingprice: 33700<br />MMRError:  0.056426332<br />body: Convertible<br />make: BMW<br />color: gray","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(58,76,155,1)","opacity":0.16666666666666669,"size":8.2760463698848756,"symbol":"triangle-up","line":{"width":1.8897637795275593,"color":"rgba(58,76,155,1)"}},"hoveron":"points","name":"(gray,Convertible,BMW)","legendgroup":"(gray,Convertible,BMW)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2013],"y":[13100],"text":"year: 2013<br />sellingprice: 13100<br />MMRError:  0.043824701<br />body: Convertible<br />make: Ford<br />color: gray","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(58,76,155,1)","opacity":0.3666666666666667,"size":8.2114253591161948,"symbol":"triangle-up","line":{"width":1.8897637795275593,"color":"rgba(58,76,155,1)"}},"hoveron":"points","name":"(gray,Convertible,Ford)","legendgroup":"(gray,Convertible,Ford)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2006],"y":[4500],"text":"year: 2006<br />sellingprice:  4500<br />MMRError: -0.150943396<br />body: Convertible<br />make: Toyota<br />color: gray","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(58,76,155,1)","opacity":0.96666666666666667,"size":7.1382572268231081,"symbol":"triangle-up","line":{"width":1.8897637795275593,"color":"rgba(58,76,155,1)"}},"hoveron":"points","name":"(gray,Convertible,Toyota)","legendgroup":"(gray,Convertible,Toyota)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2013],"y":[25000],"text":"year: 2013<br />sellingprice: 25000<br />MMRError:  0.050420168<br />body: Coupe<br />make: Infiniti<br />color: gray","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(58,76,155,1)","opacity":0.5,"size":8.2453102924185,"symbol":"square","line":{"width":1.8897637795275593,"color":"rgba(58,76,155,1)"}},"hoveron":"points","name":"(gray,Coupe,Infiniti)","legendgroup":"(gray,Coupe,Infiniti)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2013],"y":[24750],"text":"year: 2013<br />sellingprice: 24750<br />MMRError:  0.100000000<br />body: Crew Cab<br />make: Chevrolet<br />color: gray","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(58,76,155,1)","opacity":0.26666666666666666,"size":8.4956873166094447,"symbol":"cross-thin-open","line":{"width":1.8897637795275593,"color":"rgba(58,76,155,1)"}},"hoveron":"points","name":"(gray,Crew Cab,Chevrolet)","legendgroup":"(gray,Crew Cab,Chevrolet)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2014],"y":[24200],"text":"year: 2014<br />sellingprice: 24200<br />MMRError: -0.012244898<br />body: Wagon<br />make: Ford<br />color: gray","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(58,76,155,1)","opacity":0.3666666666666667,"size":7.9174789863709796,"symbol":"square-x-open","line":{"width":1.8897637795275593,"color":"rgba(58,76,155,1)"}},"hoveron":"points","name":"(gray,Wagon,Ford)","legendgroup":"(gray,Wagon,Ford)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2012],"y":[34500],"text":"year: 2012<br />sellingprice: 34500<br />MMRError:  0.032934132<br />body: Sedan<br />make: BMW<br />color: gray","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(58,76,155,1)","opacity":0.16666666666666669,"size":8.155164259066245,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(58,76,155,1)"}},"hoveron":"points","name":"(gray,Sedan,BMW)","legendgroup":"(gray,Sedan,BMW)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2013,2012,2013],"y":[13000,10500,12800],"text":["year: 2013<br />sellingprice: 13000<br />MMRError:  0.015625000<br />body: Sedan<br />make: Ford<br />color: gray","year: 2012<br />sellingprice: 10500<br />MMRError: -0.070796460<br />body: Sedan<br />make: Ford<br />color: gray","year: 2013<br />sellingprice: 12800<br />MMRError: -0.085714286<br />body: Sedan<br />make: Ford<br />color: gray"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(58,76,155,1)","opacity":0.3666666666666667,"size":[8.0649332433861609,7.5983323062407022,7.514842626426419],"symbol":[null,null,null],"line":{"width":1.8897637795275593,"color":"rgba(58,76,155,1)"}},"hoveron":"points","name":"(gray,Sedan,Ford)","legendgroup":"(gray,Sedan,Ford)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2013,2013],"y":[13500,11800],"text":["year: 2013<br />sellingprice: 13500<br />MMRError:  0.062992126<br />body: Sedan<br />make: Hyundai<br />color: gray","year: 2013<br />sellingprice: 11800<br />MMRError:  0.008547009<br />body: Sedan<br />make: Hyundai<br />color: gray"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(58,76,155,1)","opacity":0.46666666666666667,"size":[8.3095156413578373,8.0277427542334241],"symbol":[null,null],"line":{"width":1.8897637795275593,"color":"rgba(58,76,155,1)"}},"hoveron":"points","name":"(gray,Sedan,Hyundai)","legendgroup":"(gray,Sedan,Hyundai)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2014],"y":[17250],"text":"year: 2014<br />sellingprice: 17250<br />MMRError: -0.025423729<br />body: Sedan<br />make: Mazda<br />color: gray","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(58,76,155,1)","opacity":0.6333333333333333,"size":7.8467827862709765,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(58,76,155,1)"}},"hoveron":"points","name":"(gray,Sedan,Mazda)","legendgroup":"(gray,Sedan,Mazda)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2014],"y":[28400],"text":"year: 2014<br />sellingprice: 28400<br />MMRError:  0.014285714<br />body: Sedan<br />make: Nissan<br />color: gray","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(58,76,155,1)","opacity":0.79999999999999993,"size":8.0579093499881917,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(58,76,155,1)"}},"hoveron":"points","name":"(gray,Sedan,Nissan)","legendgroup":"(gray,Sedan,Nissan)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2013],"y":[18000],"text":"year: 2013<br />sellingprice: 18000<br />MMRError: -0.016393443<br />body: Sedan<br />make: Subaru<br />color: gray","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(58,76,155,1)","opacity":0.90000000000000002,"size":7.8952932340198947,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(58,76,155,1)"}},"hoveron":"points","name":"(gray,Sedan,Subaru)","legendgroup":"(gray,Sedan,Subaru)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2007,2012],"y":[1100,13000],"text":["year: 2007<br />sellingprice:  1100<br />MMRError: -0.750000000<br />body: Sedan<br />make: Toyota<br />color: gray","year: 2012<br />sellingprice: 13000<br />MMRError: -0.022556391<br />body: Sedan<br />make: Toyota<br />color: gray"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(58,76,155,1)","opacity":0.96666666666666667,"size":[0.037795275590551181,7.8622186335353996],"symbol":[null,null],"line":{"width":1.8897637795275593,"color":"rgba(58,76,155,1)"}},"hoveron":"points","name":"(gray,Sedan,Toyota)","legendgroup":"(gray,Sedan,Toyota)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2004],"y":[900],"text":"year: 2004<br />sellingprice:   900<br />MMRError: -0.550000000<br />body: Sedan<br />make: Volkswagen<br />color: gray","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(58,76,155,1)","opacity":1,"size":4.1404755409072376,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(58,76,155,1)"}},"hoveron":"points","name":"(gray,Sedan,Volkswagen)","legendgroup":"(gray,Sedan,Volkswagen)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2012,2012],"y":[13900,10400],"text":["year: 2012<br />sellingprice: 13900<br />MMRError:  0.098814229<br />body: Mega Cab<br />make: Dodge<br />color: gray","year: 2012<br />sellingprice: 10400<br />MMRError: -0.028037383<br />body: Mega Cab<br />make: Dodge<br />color: gray"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(58,76,155,1)","opacity":0.33333333333333337,"size":[8.4897857747528302,7.8326859728367184],"symbol":[null,null],"line":{"width":1.8897637795275593,"color":"rgba(58,76,155,1)"}},"hoveron":"points","name":"(gray,Mega Cab,Dodge)","legendgroup":"(gray,Mega Cab,Dodge)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2013],"y":[11000],"text":"year: 2013<br />sellingprice: 11000<br />MMRError: -0.009009009<br />body: Mega Cab<br />make: Mazda<br />color: gray","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(58,76,155,1)","opacity":0.6333333333333333,"size":7.934740733114535,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(58,76,155,1)"}},"hoveron":"points","name":"(gray,Mega Cab,Mazda)","legendgroup":"(gray,Mega Cab,Mazda)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2013],"y":[9600],"text":"year: 2013<br />sellingprice:  9600<br />MMRError:  0.035040431<br />body: Regular Cab<br />make: Dodge<br />color: gray","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(58,76,155,1)","opacity":0.33333333333333337,"size":8.1660758581109185,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(58,76,155,1)"}},"hoveron":"points","name":"(gray,Regular Cab,Dodge)","legendgroup":"(gray,Regular Cab,Dodge)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2013],"y":[14700],"text":"year: 2013<br />sellingprice: 14700<br />MMRError:  0.080882353<br />body: Regular Cab<br />make: Honda<br />color: gray","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(58,76,155,1)","opacity":0.43333333333333335,"size":8.4000316989720059,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(58,76,155,1)"}},"hoveron":"points","name":"(gray,Regular Cab,Honda)","legendgroup":"(gray,Regular Cab,Honda)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2013],"y":[9100],"text":"year: 2013<br />sellingprice:  9100<br />MMRError:  0.055072464<br />body: Regular Cab<br />make: Kia<br />color: gray","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(58,76,155,1)","opacity":0.56666666666666665,"size":8.269128072718944,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(58,76,155,1)"}},"hoveron":"points","name":"(gray,Regular Cab,Kia)","legendgroup":"(gray,Regular Cab,Kia)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2012],"y":[10000],"text":"year: 2012<br />sellingprice: 10000<br />MMRError: -0.148936170<br />body: Regular Cab<br />make: Nissan<br />color: gray","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(58,76,155,1)","opacity":0.79999999999999993,"size":7.1501428426934961,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(58,76,155,1)"}},"hoveron":"points","name":"(gray,Regular Cab,Nissan)","legendgroup":"(gray,Regular Cab,Nissan)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2013],"y":[38750],"text":"year: 2013<br />sellingprice: 38750<br />MMRError:  0.003886010<br />body: SuperCrew<br />make: Audi<br />color: gray","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(58,76,155,1)","opacity":0.13333333333333333,"size":8.0031572538987792,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(58,76,155,1)"}},"hoveron":"points","name":"(gray,SuperCrew,Audi)","legendgroup":"(gray,SuperCrew,Audi)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2013],"y":[27600],"text":"year: 2013<br />sellingprice: 27600<br />MMRError:  0.029850746<br />body: SuperCrew<br />make: Honda<br />color: gray","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(58,76,155,1)","opacity":0.43333333333333335,"size":8.1391644017710174,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(58,76,155,1)"}},"hoveron":"points","name":"(gray,SuperCrew,Honda)","legendgroup":"(gray,SuperCrew,Honda)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2004],"y":[4500],"text":"year: 2004<br />sellingprice:  4500<br />MMRError:  0.084337349<br />body: SuperCrew<br />make: Nissan<br />color: gray","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(58,76,155,1)","opacity":0.79999999999999993,"size":8.4173996964080064,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(58,76,155,1)"}},"hoveron":"points","name":"(gray,SuperCrew,Nissan)","legendgroup":"(gray,SuperCrew,Nissan)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2014],"y":[18700],"text":"year: 2014<br />sellingprice: 18700<br />MMRError:  0.041782730<br />body: SUV<br />make: Dodge<br />color: gray","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(58,76,155,1)","opacity":0.33333333333333337,"size":8.2009059926881687,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(58,76,155,1)"}},"hoveron":"points","name":"(gray,SUV,Dodge)","legendgroup":"(gray,SUV,Dodge)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2012,2012,2014],"y":[16200,18300,27300],"text":["year: 2012<br />sellingprice: 16200<br />MMRError: -0.041420118<br />body: SUV<br />make: Ford<br />color: gray","year: 2012<br />sellingprice: 18300<br />MMRError:  0.028089888<br />body: SUV<br />make: Ford<br />color: gray","year: 2014<br />sellingprice: 27300<br />MMRError: -0.010869565<br />body: SUV<br />make: Ford<br />color: gray"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(58,76,155,1)","opacity":0.3666666666666667,"size":[7.7601026360969252,8.1300130176795573,7.9248202714181497],"symbol":[null,null,null],"line":{"width":1.8897637795275593,"color":"rgba(58,76,155,1)"}},"hoveron":"points","name":"(gray,SUV,Ford)","legendgroup":"(gray,SUV,Ford)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2015],"y":[32500],"text":"year: 2015<br />sellingprice: 32500<br />MMRError: -0.021084337<br />body: SUV<br />make: GMC<br />color: gray","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(58,76,155,1)","opacity":0.40000000000000002,"size":7.8701313772865635,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(58,76,155,1)"}},"hoveron":"points","name":"(gray,SUV,GMC)","legendgroup":"(gray,SUV,GMC)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2012],"y":[22750],"text":"year: 2012<br />sellingprice: 22750<br />MMRError: -0.114785992<br />body: SUV<br />make: Mercedes-Benz<br />color: gray","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(58,76,155,1)","opacity":0.66666666666666663,"size":7.3494000512489679,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(58,76,155,1)"}},"hoveron":"points","name":"(gray,SUV,Mercedes-Benz)","legendgroup":"(gray,SUV,Mercedes-Benz)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2014],"y":[19600],"text":"year: 2014<br />sellingprice: 19600<br />MMRError: -0.117117117<br />body: SUV<br />make: Subaru<br />color: gray","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(58,76,155,1)","opacity":0.90000000000000002,"size":7.3359715611127001,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(58,76,155,1)"}},"hoveron":"points","name":"(gray,SUV,Subaru)","legendgroup":"(gray,SUV,Subaru)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2011],"y":[24900],"text":"year: 2011<br />sellingprice: 24900<br />MMRError:  0.068669528<br />body: Coupe<br />make: Chevrolet<br />color: green","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(112,123,170,1)","opacity":0.26666666666666666,"size":8.3383475185936309,"symbol":"square","line":{"width":1.8897637795275593,"color":"rgba(112,123,170,1)"}},"hoveron":"points","name":"(green,Coupe,Chevrolet)","legendgroup":"(green,Coupe,Chevrolet)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1998],"y":[1000],"text":"year: 1998<br />sellingprice:  1000<br />MMRError:  0.052631579<br />body: Sedan<br />make: Honda<br />color: green","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(112,123,170,1)","opacity":0.43333333333333335,"size":8.2566403848043315,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(112,123,170,1)"}},"hoveron":"points","name":"(green,Sedan,Honda)","legendgroup":"(green,Sedan,Honda)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2013],"y":[18600],"text":"year: 2013<br />sellingprice: 18600<br />MMRError:  0.027624309<br />body: SUV<br />make: Ford<br />color: green","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(112,123,170,1)","opacity":0.3666666666666667,"size":8.127591623712954,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(112,123,170,1)"}},"hoveron":"points","name":"(green,SUV,Ford)","legendgroup":"(green,SUV,Ford)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2014],"y":[25900],"text":"year: 2014<br />sellingprice: 25900<br />MMRError: -0.078291815<br />body: SUV<br />make: Jeep<br />color: orange","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(79,148,205,1)","opacity":0.53333333333333333,"size":7.5564993981838899,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(79,148,205,1)"}},"hoveron":"points","name":"(orange,SUV,Jeep)","legendgroup":"(orange,SUV,Jeep)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2012],"y":[10500],"text":"year: 2012<br />sellingprice: 10500<br />MMRError:  0.004784689<br />body: Convertible<br />make: Ford<br />color: red","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(64,224,208,1)","opacity":0.3666666666666667,"size":8.0079034413186303,"symbol":"triangle-up","line":{"width":1.8897637795275593,"color":"rgba(64,224,208,1)"}},"hoveron":"points","name":"(red,Convertible,Ford)","legendgroup":"(red,Convertible,Ford)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2012],"y":[16800],"text":"year: 2012<br />sellingprice: 16800<br />MMRError: -0.086956522<br />body: Convertible<br />make: Mazda<br />color: red","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(64,224,208,1)","opacity":0.6333333333333333,"size":7.5078481933231975,"symbol":"triangle-up","line":{"width":1.8897637795275593,"color":"rgba(64,224,208,1)"}},"hoveron":"points","name":"(red,Convertible,Mazda)","legendgroup":"(red,Convertible,Mazda)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2011],"y":[26250],"text":"year: 2011<br />sellingprice: 26250<br />MMRError:  0.005747126<br />body: Convertible<br />make: Mercedes-Benz<br />color: red","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(64,224,208,1)","opacity":0.66666666666666663,"size":8.0129832256036675,"symbol":"triangle-up","line":{"width":1.8897637795275593,"color":"rgba(64,224,208,1)"}},"hoveron":"points","name":"(red,Convertible,Mercedes-Benz)","legendgroup":"(red,Convertible,Mercedes-Benz)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2002],"y":[1300],"text":"year: 2002<br />sellingprice:  1300<br />MMRError: -0.161290323<br />body: Convertible<br />make: Mitsubishi<br />color: red","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(64,224,208,1)","opacity":0.76666666666666661,"size":7.0766704241035807,"symbol":"triangle-up","line":{"width":1.8897637795275593,"color":"rgba(64,224,208,1)"}},"hoveron":"points","name":"(red,Convertible,Mitsubishi)","legendgroup":"(red,Convertible,Mitsubishi)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2006],"y":[3500],"text":"year: 2006<br />sellingprice:  3500<br />MMRError: -0.274611399<br />body: Coupe<br />make: Chevrolet<br />color: red","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(64,224,208,1)","opacity":0.26666666666666666,"size":6.3630359716736518,"symbol":"square","line":{"width":1.8897637795275593,"color":"rgba(64,224,208,1)"}},"hoveron":"points","name":"(red,Coupe,Chevrolet)","legendgroup":"(red,Coupe,Chevrolet)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2008,2012],"y":[11400,24000],"text":["year: 2008<br />sellingprice: 11400<br />MMRError:  0.169230769<br />body: Crew Cab<br />make: Chevrolet<br />color: red","year: 2012<br />sellingprice: 24000<br />MMRError:  0.188118812<br />body: Crew Cab<br />make: Chevrolet<br />color: red"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(64,224,208,1)","opacity":0.26666666666666666,"size":[8.8333847526011091,8.9232896644750834],"symbol":"cross-thin-open","line":{"width":1.8897637795275593,"color":"rgba(64,224,208,1)"}},"hoveron":"points","name":"(red,Crew Cab,Chevrolet)","legendgroup":"(red,Crew Cab,Chevrolet)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2010,2014],"y":[6200,14800],"text":["year: 2010<br />sellingprice:  6200<br />MMRError: -0.132867133<br />body: Sedan<br />make: Chevrolet<br />color: red","year: 2014<br />sellingprice: 14800<br />MMRError: -0.016611296<br />body: Sedan<br />make: Chevrolet<br />color: red"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(64,224,208,1)","opacity":0.26666666666666666,"size":[7.2445876912206453,7.8941264593746245],"symbol":[null,null],"line":{"width":1.8897637795275593,"color":"rgba(64,224,208,1)"}},"hoveron":"points","name":"(red,Sedan,Chevrolet)","legendgroup":"(red,Sedan,Chevrolet)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2013],"y":[13100],"text":"year: 2013<br />sellingprice: 13100<br />MMRError:  0.100840336<br />body: Sedan<br />make: Dodge<br />color: red","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(64,224,208,1)","opacity":0.33333333333333337,"size":8.4998671498475478,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(64,224,208,1)"}},"hoveron":"points","name":"(red,Sedan,Dodge)","legendgroup":"(red,Sedan,Dodge)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2012],"y":[12400],"text":"year: 2012<br />sellingprice: 12400<br />MMRError:  0.068965517<br />body: Sedan<br />make: Ford<br />color: red","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(64,224,208,1)","opacity":0.3666666666666667,"size":8.3398479121605877,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(64,224,208,1)"}},"hoveron":"points","name":"(red,Sedan,Ford)","legendgroup":"(red,Sedan,Ford)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2014],"y":[20000],"text":"year: 2014<br />sellingprice: 20000<br />MMRError: -0.004975124<br />body: Sedan<br />make: Hyundai<br />color: red","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(64,224,208,1)","opacity":0.46666666666666667,"size":7.9562066689416895,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(64,224,208,1)"}},"hoveron":"points","name":"(red,Sedan,Hyundai)","legendgroup":"(red,Sedan,Hyundai)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2012,2011],"y":[11500,11800],"text":["year: 2012<br />sellingprice: 11500<br />MMRError: -0.021276596<br />body: Sedan<br />make: Kia<br />color: red","year: 2011<br />sellingprice: 11800<br />MMRError:  0.092592593<br />body: Sedan<br />make: Kia<br />color: red"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(64,224,208,1)","opacity":0.56666666666666665,"size":[7.8690983828299528,8.458753113768287],"symbol":[null,null],"line":{"width":1.8897637795275593,"color":"rgba(64,224,208,1)"}},"hoveron":"points","name":"(red,Sedan,Kia)","legendgroup":"(red,Sedan,Kia)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2013],"y":[10700],"text":"year: 2013<br />sellingprice: 10700<br />MMRError: -0.027272727<br />body: Sedan<br />make: Nissan<br />color: red","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(64,224,208,1)","opacity":0.79999999999999993,"size":7.8368128013428411,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(64,224,208,1)"}},"hoveron":"points","name":"(red,Sedan,Nissan)","legendgroup":"(red,Sedan,Nissan)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2011,2014],"y":[7500,15600],"text":["year: 2011<br />sellingprice:  7500<br />MMRError: -0.035369775<br />body: Sedan<br />make: Toyota<br />color: red","year: 2014<br />sellingprice: 15600<br />MMRError:  0.000000000<br />body: Sedan<br />make: Toyota<br />color: red"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(64,224,208,1)","opacity":0.96666666666666667,"size":[7.7930017480035714,7.9826014467832289],"symbol":[null,null],"line":{"width":1.8897637795275593,"color":"rgba(64,224,208,1)"}},"hoveron":"points","name":"(red,Sedan,Toyota)","legendgroup":"(red,Sedan,Toyota)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2007],"y":[10200],"text":"year: 2007<br />sellingprice: 10200<br />MMRError:  0.324675325<br />body: Regular Cab<br />make: BMW<br />color: red","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(64,224,208,1)","opacity":0.16666666666666669,"size":9.5480316898612099,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(64,224,208,1)"}},"hoveron":"points","name":"(red,Regular Cab,BMW)","legendgroup":"(red,Regular Cab,BMW)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2008],"y":[12400],"text":"year: 2008<br />sellingprice: 12400<br />MMRError:  0.122171946<br />body: Regular Cab<br />make: Cadillac<br />color: red","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(64,224,208,1)","opacity":0.23333333333333334,"size":8.605287738657335,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(64,224,208,1)"}},"hoveron":"points","name":"(red,Regular Cab,Cadillac)","legendgroup":"(red,Regular Cab,Cadillac)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2004],"y":[16000],"text":"year: 2004<br />sellingprice: 16000<br />MMRError:  0.022364217<br />body: Regular Cab<br />make: Chevrolet<br />color: red","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(64,224,208,1)","opacity":0.26666666666666666,"size":8.1001842506188098,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(64,224,208,1)"}},"hoveron":"points","name":"(red,Regular Cab,Chevrolet)","legendgroup":"(red,Regular Cab,Chevrolet)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2013],"y":[20000],"text":"year: 2013<br />sellingprice: 20000<br />MMRError:  0.055408971<br />body: Regular Cab<br />make: Honda<br />color: red","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(64,224,208,1)","opacity":0.43333333333333335,"size":8.2708481746727056,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(64,224,208,1)"}},"hoveron":"points","name":"(red,Regular Cab,Honda)","legendgroup":"(red,Regular Cab,Honda)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2012],"y":[12000],"text":"year: 2012<br />sellingprice: 12000<br />MMRError: -0.058823529<br />body: Regular Cab<br />make: Nissan<br />color: red","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(64,224,208,1)","opacity":0.79999999999999993,"size":7.6646793817364136,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(64,224,208,1)"}},"hoveron":"points","name":"(red,Regular Cab,Nissan)","legendgroup":"(red,Regular Cab,Nissan)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2000],"y":[1600],"text":"year: 2000<br />sellingprice:  1600<br />MMRError:  0.015873016<br />body: Regular Cab<br />make: Toyota<br />color: red","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(64,224,208,1)","opacity":0.96666666666666667,"size":8.0662332900329226,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(64,224,208,1)"}},"hoveron":"points","name":"(red,Regular Cab,Toyota)","legendgroup":"(red,Regular Cab,Toyota)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2014],"y":[28800],"text":"year: 2014<br />sellingprice: 28800<br />MMRError: -0.079872204<br />body: SUV<br />make: Chevrolet<br />color: red","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(64,224,208,1)","opacity":0.26666666666666666,"size":7.5476492166645146,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(64,224,208,1)"}},"hoveron":"points","name":"(red,SUV,Chevrolet)","legendgroup":"(red,SUV,Chevrolet)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2014],"y":[20800],"text":"year: 2014<br />sellingprice: 20800<br />MMRError:  0.014634146<br />body: SUV<br />make: Ford<br />color: red","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(64,224,208,1)","opacity":0.3666666666666667,"size":8.0597372962397138,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(64,224,208,1)"}},"hoveron":"points","name":"(red,SUV,Ford)","legendgroup":"(red,SUV,Ford)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2011],"y":[15700],"text":"year: 2011<br />sellingprice: 15700<br />MMRError: -0.169312169<br />body: SUV<br />make: Jeep<br />color: red","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(64,224,208,1)","opacity":0.53333333333333333,"size":7.0285495498195996,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(64,224,208,1)"}},"hoveron":"points","name":"(red,SUV,Jeep)","legendgroup":"(red,SUV,Jeep)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2006],"y":[1800],"text":"year: 2006<br />sellingprice:  1800<br />MMRError: -0.544303797<br />body: SUV<br />make: Pontiac<br />color: red","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(64,224,208,1)","opacity":0.83333333333333326,"size":4.1984896103745557,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(64,224,208,1)"}},"hoveron":"points","name":"(red,SUV,Pontiac)","legendgroup":"(red,SUV,Pontiac)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2012],"y":[11200],"text":"year: 2012<br />sellingprice: 11200<br />MMRError:  0.151670951<br />body: Convertible<br />make: Chrysler<br />color: silver","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(99,184,255,1)","opacity":0.30000000000000004,"size":8.7489697798938764,"symbol":"triangle-up","line":{"width":1.8897637795275593,"color":"rgba(99,184,255,1)"}},"hoveron":"points","name":"(silver,Convertible,Chrysler)","legendgroup":"(silver,Convertible,Chrysler)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2011],"y":[6200],"text":"year: 2011<br />sellingprice:  6200<br />MMRError:  0.073593074<br />body: Convertible<br />make: Nissan<br />color: silver","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(99,184,255,1)","opacity":0.79999999999999993,"size":8.3632702040368265,"symbol":"triangle-up","line":{"width":1.8897637795275593,"color":"rgba(99,184,255,1)"}},"hoveron":"points","name":"(silver,Convertible,Nissan)","legendgroup":"(silver,Convertible,Nissan)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2014],"y":[34800],"text":"year: 2014<br />sellingprice: 34800<br />MMRError:  0.137254902<br />body: Crew Cab<br />make: Chevrolet<br />color: silver","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(99,184,255,1)","opacity":0.26666666666666666,"size":8.6790514110944201,"symbol":"cross-thin-open","line":{"width":1.8897637795275593,"color":"rgba(99,184,255,1)"}},"hoveron":"points","name":"(silver,Crew Cab,Chevrolet)","legendgroup":"(silver,Crew Cab,Chevrolet)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2009],"y":[12800],"text":"year: 2009<br />sellingprice: 12800<br />MMRError: -0.003891051<br />body: Sedan<br />make: Acura<br />color: silver","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(99,184,255,1)","opacity":0.10000000000000001,"size":7.9619655517479746,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(99,184,255,1)"}},"hoveron":"points","name":"(silver,Sedan,Acura)","legendgroup":"(silver,Sedan,Acura)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2012],"y":[36500],"text":"year: 2012<br />sellingprice: 36500<br />MMRError: -0.116222760<br />body: Sedan<br />make: Audi<br />color: silver","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(99,184,255,1)","opacity":0.13333333333333333,"size":7.3411264401764527,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(99,184,255,1)"}},"hoveron":"points","name":"(silver,Sedan,Audi)","legendgroup":"(silver,Sedan,Audi)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2012],"y":[19100],"text":"year: 2012<br />sellingprice: 19100<br />MMRError:  0.024128686<br />body: Sedan<br />make: Cadillac<br />color: silver","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(99,184,255,1)","opacity":0.23333333333333334,"size":8.1093882765302148,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(99,184,255,1)"}},"hoveron":"points","name":"(silver,Sedan,Cadillac)","legendgroup":"(silver,Sedan,Cadillac)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2014,2012],"y":[19800,7900],"text":["year: 2014<br />sellingprice: 19800<br />MMRError:  0.185628743<br />body: Sedan<br />make: Chevrolet<br />color: silver","year: 2012<br />sellingprice:  7900<br />MMRError: -0.114845938<br />body: Sedan<br />make: Chevrolet<br />color: silver"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(99,184,255,1)","opacity":0.26666666666666666,"size":[8.911489347357838,7.3490550392159744],"symbol":[null,null],"line":{"width":1.8897637795275593,"color":"rgba(99,184,255,1)"}},"hoveron":"points","name":"(silver,Sedan,Chevrolet)","legendgroup":"(silver,Sedan,Chevrolet)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2013],"y":[10700],"text":"year: 2013<br />sellingprice: 10700<br />MMRError: -0.133603239<br />body: Sedan<br />make: Chrysler<br />color: silver","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(99,184,255,1)","opacity":0.30000000000000004,"size":7.2402883366750599,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(99,184,255,1)"}},"hoveron":"points","name":"(silver,Sedan,Chrysler)","legendgroup":"(silver,Sedan,Chrysler)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2013,2013,2012],"y":[12600,10700,10300],"text":["year: 2013<br />sellingprice: 12600<br />MMRError: -0.073529412<br />body: Sedan<br />make: Ford<br />color: silver","year: 2013<br />sellingprice: 10700<br />MMRError: -0.027272727<br />body: Sedan<br />make: Ford<br />color: silver","year: 2012<br />sellingprice: 10300<br />MMRError:  0.095744681<br />body: Sedan<br />make: Ford<br />color: silver"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(99,184,255,1)","opacity":0.3666666666666667,"size":[7.5831060833883406,7.8368128013428411,8.4744895588663169],"symbol":[null,null,null],"line":{"width":1.8897637795275593,"color":"rgba(99,184,255,1)"}},"hoveron":"points","name":"(silver,Sedan,Ford)","legendgroup":"(silver,Sedan,Ford)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2014],"y":[12500],"text":"year: 2014<br />sellingprice: 12500<br />MMRError:  0.004016064<br />body: Sedan<br />make: Kia<br />color: silver","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(99,184,255,1)","opacity":0.56666666666666665,"size":8.0038442819490463,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(99,184,255,1)"}},"hoveron":"points","name":"(silver,Sedan,Kia)","legendgroup":"(silver,Sedan,Kia)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2012,2008,2012,2012],"y":[11500,5300,13500,16100],"text":["year: 2012<br />sellingprice: 11500<br />MMRError:  0.127450980<br />body: Sedan<br />make: Nissan<br />color: silver","year: 2008<br />sellingprice:  5300<br />MMRError:  0.413333333<br />body: Sedan<br />make: Nissan<br />color: silver","year: 2012<br />sellingprice: 13500<br />MMRError:  0.054687500<br />body: Sedan<br />make: Nissan<br />color: silver","year: 2012<br />sellingprice: 16100<br />MMRError: -0.087818697<br />body: Sedan<br />make: Nissan<br />color: silver"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(99,184,255,1)","opacity":0.79999999999999993,"size":[8.6311770475033498,9.9325437905328986,8.2671598376048845,7.5029898475129695],"symbol":[null,null,null,null],"line":{"width":1.8897637795275593,"color":"rgba(99,184,255,1)"}},"hoveron":"points","name":"(silver,Sedan,Nissan)","legendgroup":"(silver,Sedan,Nissan)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2014,2005],"y":[16300,7500],"text":["year: 2014<br />sellingprice: 16300<br />MMRError: -0.015105740<br />body: Sedan<br />make: Toyota<br />color: silver","year: 2005<br />sellingprice:  7500<br />MMRError:  0.149425287<br />body: Sedan<br />make: Toyota<br />color: silver"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(99,184,255,1)","opacity":0.96666666666666667,"size":[7.9021863588181471,8.7381151745002565],"symbol":[null,null],"line":{"width":1.8897637795275593,"color":"rgba(99,184,255,1)"}},"hoveron":"points","name":"(silver,Sedan,Toyota)","legendgroup":"(silver,Sedan,Toyota)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2011],"y":[14100],"text":"year: 2011<br />sellingprice: 14100<br />MMRError: -0.044067797<br />body: Mega Cab<br />make: Chrysler<br />color: silver","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(99,184,255,1)","opacity":0.30000000000000004,"size":7.7456615536859408,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(99,184,255,1)"}},"hoveron":"points","name":"(silver,Mega Cab,Chrysler)","legendgroup":"(silver,Mega Cab,Chrysler)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2011],"y":[6900],"text":"year: 2011<br />sellingprice:  6900<br />MMRError: -0.038327526<br />body: Mega Cab<br />make: Dodge<br />color: silver","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(99,184,255,1)","opacity":0.33333333333333337,"size":7.7769362682462839,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(99,184,255,1)"}},"hoveron":"points","name":"(silver,Mega Cab,Dodge)","legendgroup":"(silver,Mega Cab,Dodge)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2012,2013],"y":[19900,26200],"text":["year: 2012<br />sellingprice: 19900<br />MMRError:  0.198795181<br />body: Mega Cab<br />make: Honda<br />color: silver","year: 2013<br />sellingprice: 26200<br />MMRError: -0.060931900<br />body: Mega Cab<br />make: Honda<br />color: silver"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(99,184,255,1)","opacity":0.43333333333333335,"size":[8.9737078174116185,7.653037943055466],"symbol":[null,null],"line":{"width":1.8897637795275593,"color":"rgba(99,184,255,1)"}},"hoveron":"points","name":"(silver,Mega Cab,Honda)","legendgroup":"(silver,Mega Cab,Honda)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2002],"y":[1900],"text":"year: 2002<br />sellingprice:  1900<br />MMRError:  0.767441860<br />body: Regular Cab<br />make: Chevrolet<br />color: silver","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(99,184,255,1)","opacity":0.26666666666666666,"size":11.338582677165356,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(99,184,255,1)"}},"hoveron":"points","name":"(silver,Regular Cab,Chevrolet)","legendgroup":"(silver,Regular Cab,Chevrolet)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2005],"y":[550],"text":"year: 2005<br />sellingprice:   550<br />MMRError: -0.639344262<br />body: Regular Cab<br />make: Hyundai<br />color: silver","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(99,184,255,1)","opacity":0.46666666666666667,"size":3.0894798570839335,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(99,184,255,1)"}},"hoveron":"points","name":"(silver,Regular Cab,Hyundai)","legendgroup":"(silver,Regular Cab,Hyundai)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2012],"y":[12000],"text":"year: 2012<br />sellingprice: 12000<br />MMRError: -0.024390244<br />body: Regular Cab<br />make: Toyota<br />color: silver","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(99,184,255,1)","opacity":0.96666666666666667,"size":7.8523498986275335,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(99,184,255,1)"}},"hoveron":"points","name":"(silver,Regular Cab,Toyota)","legendgroup":"(silver,Regular Cab,Toyota)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2004],"y":[5300],"text":"year: 2004<br />sellingprice:  5300<br />MMRError: -0.090128755<br />body: SuperCrew<br />make: Toyota<br />color: silver","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(99,184,255,1)","opacity":0.96666666666666667,"size":7.4899570856967834,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(99,184,255,1)"}},"hoveron":"points","name":"(silver,SuperCrew,Toyota)","legendgroup":"(silver,SuperCrew,Toyota)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2013,2013],"y":[13400,18500],"text":["year: 2013<br />sellingprice: 13400<br />MMRError: -0.025454545<br />body: SUV<br />make: Chevrolet<br />color: silver","year: 2013<br />sellingprice: 18500<br />MMRError: -0.033942559<br />body: SUV<br />make: Chevrolet<br />color: silver"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(99,184,255,1)","opacity":0.26666666666666666,"size":[7.8466167241648073,7.8007419995085892],"symbol":[null,null],"line":{"width":1.8897637795275593,"color":"rgba(99,184,255,1)"}},"hoveron":"points","name":"(silver,SUV,Chevrolet)","legendgroup":"(silver,SUV,Chevrolet)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2013],"y":[34750],"text":"year: 2013<br />sellingprice: 34750<br />MMRError: -0.026610644<br />body: SUV<br />make: Ford<br />color: silver","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(99,184,255,1)","opacity":0.3666666666666667,"size":7.8403842834179782,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(99,184,255,1)"}},"hoveron":"points","name":"(silver,SUV,Ford)","legendgroup":"(silver,SUV,Ford)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2007,2004],"y":[5800,1900],"text":["year: 2007<br />sellingprice:  5800<br />MMRError: -0.086614173<br />body: SUV<br />make: Hyundai<br />color: silver","year: 2004<br />sellingprice:  1900<br />MMRError:  0.206349206<br />body: SUV<br />make: Hyundai<br />color: silver"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(99,184,255,1)","opacity":0.46666666666666667,"size":[7.5097764465607177,9.0092098351128715],"symbol":[null,null],"line":{"width":1.8897637795275593,"color":"rgba(99,184,255,1)"}},"hoveron":"points","name":"(silver,SUV,Hyundai)","legendgroup":"(silver,SUV,Hyundai)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2010,2007,2010],"y":[9300,5300,16000],"text":["year: 2010<br />sellingprice:  9300<br />MMRError:  0.173501577<br />body: SUV<br />make: Jeep<br />color: silver","year: 2007<br />sellingprice:  5300<br />MMRError: -0.208955224<br />body: SUV<br />make: Jeep<br />color: silver","year: 2010<br />sellingprice: 16000<br />MMRError: -0.044776119<br />body: SUV<br />make: Jeep<br />color: silver"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(99,184,255,1)","opacity":0.53333333333333333,"size":[8.8537935254475268,6.7857052299512048,7.7417935989683553],"symbol":[null,null,null],"line":{"width":1.8897637795275593,"color":"rgba(99,184,255,1)"}},"hoveron":"points","name":"(silver,SUV,Jeep)","legendgroup":"(silver,SUV,Jeep)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2009],"y":[4100],"text":"year: 2009<br />sellingprice:  4100<br />MMRError: -0.574025974<br />body: SUV<br />make: Kia<br />color: silver","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(99,184,255,1)","opacity":0.56666666666666665,"size":3.8861665082244454,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(99,184,255,1)"}},"hoveron":"points","name":"(silver,SUV,Kia)","legendgroup":"(silver,SUV,Kia)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2007],"y":[14000],"text":"year: 2007<br />sellingprice: 14000<br />MMRError:  0.044776119<br />body: SUV<br />make: Lexus<br />color: silver","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(99,184,255,1)","opacity":0.59999999999999998,"size":8.21632203956427,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(99,184,255,1)"}},"hoveron":"points","name":"(silver,SUV,Lexus)","legendgroup":"(silver,SUV,Lexus)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2015],"y":[56250],"text":"year: 2015<br />sellingprice: 56250<br />MMRError: -0.121093750<br />body: SUV<br />make: Mercedes-Benz<br />color: silver","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(99,184,255,1)","opacity":0.66666666666666663,"size":7.3130068850377654,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(99,184,255,1)"}},"hoveron":"points","name":"(silver,SUV,Mercedes-Benz)","legendgroup":"(silver,SUV,Mercedes-Benz)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2003],"y":[7000],"text":"year: 2003<br />sellingprice:  7000<br />MMRError:  0.089494163<br />body: SUV<br />make: Toyota<br />color: silver","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(99,184,255,1)","opacity":0.96666666666666667,"size":8.4432558424103608,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(99,184,255,1)"}},"hoveron":"points","name":"(silver,SUV,Toyota)","legendgroup":"(silver,SUV,Toyota)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2012,2007],"y":[20000,13600],"text":["year: 2012<br />sellingprice: 20000<br />MMRError: -0.099099099<br />body: Convertible<br />make: BMW<br />color: white","year: 2007<br />sellingprice: 13600<br />MMRError:  0.373737374<br />body: Convertible<br />make: BMW<br />color: white"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(56,192,147,1)","opacity":0.16666666666666669,"size":[7.4391311125853168,9.7626939955206034],"symbol":"triangle-up","line":{"width":1.8897637795275593,"color":"rgba(56,192,147,1)"}},"hoveron":"points","name":"(white,Convertible,BMW)","legendgroup":"(white,Convertible,BMW)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2013],"y":[18000],"text":"year: 2013<br />sellingprice: 18000<br />MMRError: -0.095477387<br />body: Convertible<br />make: Lexus<br />color: white","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(56,192,147,1)","opacity":0.59999999999999998,"size":7.4596936313093378,"symbol":"triangle-up","line":{"width":1.8897637795275593,"color":"rgba(56,192,147,1)"}},"hoveron":"points","name":"(white,Convertible,Lexus)","legendgroup":"(white,Convertible,Lexus)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2007],"y":[7850],"text":"year: 2007<br />sellingprice:  7850<br />MMRError:  0.046666667<br />body: Convertible<br />make: Pontiac<br />color: white","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(56,192,147,1)","opacity":0.83333333333333326,"size":8.2260434611521216,"symbol":"triangle-up","line":{"width":1.8897637795275593,"color":"rgba(56,192,147,1)"}},"hoveron":"points","name":"(white,Convertible,Pontiac)","legendgroup":"(white,Convertible,Pontiac)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2013],"y":[24700],"text":"year: 2013<br />sellingprice: 24700<br />MMRError:  0.012295082<br />body: Crew Cab<br />make: Chevrolet<br />color: white","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(56,192,147,1)","opacity":0.26666666666666666,"size":8.0474580834836633,"symbol":"cross-thin-open","line":{"width":1.8897637795275593,"color":"rgba(56,192,147,1)"}},"hoveron":"points","name":"(white,Crew Cab,Chevrolet)","legendgroup":"(white,Crew Cab,Chevrolet)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2012],"y":[26300],"text":"year: 2012<br />sellingprice: 26300<br />MMRError:  0.031372549<br />body: Crew Cab<br />make: Dodge<br />color: white","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(56,192,147,1)","opacity":0.33333333333333337,"size":8.1470650655747079,"symbol":"cross-thin-open","line":{"width":1.8897637795275593,"color":"rgba(56,192,147,1)"}},"hoveron":"points","name":"(white,Crew Cab,Dodge)","legendgroup":"(white,Crew Cab,Dodge)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2009],"y":[13500],"text":"year: 2009<br />sellingprice: 13500<br />MMRError: -0.028776978<br />body: Crew Cab<br />make: Nissan<br />color: white","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(56,192,147,1)","opacity":0.79999999999999993,"size":7.8286923164185538,"symbol":"cross-thin-open","line":{"width":1.8897637795275593,"color":"rgba(56,192,147,1)"}},"hoveron":"points","name":"(white,Crew Cab,Nissan)","legendgroup":"(white,Crew Cab,Nissan)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2014,2014],"y":[22200,19200],"text":["year: 2014<br />sellingprice: 22200<br />MMRError: -0.022026432<br />body: Van<br />make: Ford<br />color: white","year: 2014<br />sellingprice: 19200<br />MMRError: -0.037593985<br />body: Van<br />make: Ford<br />color: white"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(56,192,147,1)","opacity":0.3666666666666667,"size":[7.8650682500579654,7.7809237179821702],"symbol":"asterisk-open","line":{"width":1.8897637795275593,"color":"rgba(56,192,147,1)"}},"hoveron":"points","name":"(white,Van,Ford)","legendgroup":"(white,Van,Ford)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2012],"y":[27250],"text":"year: 2012<br />sellingprice: 27250<br />MMRError:  0.250000000<br />body: Van<br />make: Mercedes-Benz<br />color: white","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(56,192,147,1)","opacity":0.66666666666666663,"size":9.2116672387855338,"symbol":"asterisk-open","line":{"width":1.8897637795275593,"color":"rgba(56,192,147,1)"}},"hoveron":"points","name":"(white,Van,Mercedes-Benz)","legendgroup":"(white,Van,Mercedes-Benz)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2005],"y":[5600],"text":"year: 2005<br />sellingprice:  5600<br />MMRError:  0.280000000<br />body: Sedan<br />make: BMW<br />color: white","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(56,192,147,1)","opacity":0.16666666666666669,"size":9.3482584542411082,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(56,192,147,1)"}},"hoveron":"points","name":"(white,Sedan,BMW)","legendgroup":"(white,Sedan,BMW)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2009,2014,2010,2009,2012],"y":[4700,11500,7500,6500,11000],"text":["year: 2009<br />sellingprice:  4700<br />MMRError:  0.314685315<br />body: Sedan<br />make: Chevrolet<br />color: white","year: 2014<br />sellingprice: 11500<br />MMRError:  0.036036036<br />body: Sedan<br />make: Chevrolet<br />color: white","year: 2010<br />sellingprice:  7500<br />MMRError:  0.123595506<br />body: Sedan<br />make: Chevrolet<br />color: white","year: 2009<br />sellingprice:  6500<br />MMRError:  0.097046414<br />body: Sedan<br />make: Chevrolet<br />color: white","year: 2012<br />sellingprice: 11000<br />MMRError:  0.154855643<br />body: Sedan<br />make: Chevrolet<br />color: white"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(56,192,147,1)","opacity":0.26666666666666666,"size":[9.5037256654602178,8.1712284530791024,8.6122768227792879,8.4809797550437516,8.7643401061963893],"symbol":[null,null,null,null,null],"line":{"width":1.8897637795275593,"color":"rgba(56,192,147,1)"}},"hoveron":"points","name":"(white,Sedan,Chevrolet)","legendgroup":"(white,Sedan,Chevrolet)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2014,2010],"y":[16200,8000],"text":["year: 2014<br />sellingprice: 16200<br />MMRError: -0.021148036<br />body: Sedan<br />make: Dodge<br />color: white","year: 2010<br />sellingprice:  8000<br />MMRError:  0.189591078<br />body: Sedan<br />make: Dodge<br />color: white"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(56,192,147,1)","opacity":0.33333333333333337,"size":[7.8697891414462369,8.9302592957210276],"symbol":[null,null],"line":{"width":1.8897637795275593,"color":"rgba(56,192,147,1)"}},"hoveron":"points","name":"(white,Sedan,Dodge)","legendgroup":"(white,Sedan,Dodge)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2011],"y":[6500],"text":"year: 2011<br />sellingprice:  6500<br />MMRError:  0.011673152<br />body: Sedan<br />make: Ford<br />color: white","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(56,192,147,1)","opacity":0.3666666666666667,"size":8.0441900132158732,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(56,192,147,1)"}},"hoveron":"points","name":"(white,Sedan,Ford)","legendgroup":"(white,Sedan,Ford)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2012,2014,2014],"y":[17300,18500,11800],"text":["year: 2012<br />sellingprice: 17300<br />MMRError:  0.000000000<br />body: Sedan<br />make: Kia<br />color: white","year: 2014<br />sellingprice: 18500<br />MMRError:  0.022099448<br />body: Sedan<br />make: Kia<br />color: white","year: 2014<br />sellingprice: 11800<br />MMRError:  0.017241379<br />body: Sedan<br />make: Kia<br />color: white"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(56,192,147,1)","opacity":0.56666666666666665,"size":[7.9826014467832289,8.0988022215520719,8.0734021797677826],"symbol":[null,null,null],"line":{"width":1.8897637795275593,"color":"rgba(56,192,147,1)"}},"hoveron":"points","name":"(white,Sedan,Kia)","legendgroup":"(white,Sedan,Kia)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2012,2011],"y":[20250,19500],"text":["year: 2012<br />sellingprice: 20250<br />MMRError: -0.002463054<br />body: Sedan<br />make: Mercedes-Benz<br />color: white","year: 2011<br />sellingprice: 19500<br />MMRError:  0.007751938<br />body: Sedan<br />make: Mercedes-Benz<br />color: white"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(56,192,147,1)","opacity":0.66666666666666663,"size":[7.9695450597006028,8.0235543272481991],"symbol":[null,null],"line":{"width":1.8897637795275593,"color":"rgba(56,192,147,1)"}},"hoveron":"points","name":"(white,Sedan,Mercedes-Benz)","legendgroup":"(white,Sedan,Mercedes-Benz)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2013,2014,2012,2012],"y":[14400,12750,13800,11750],"text":["year: 2013<br />sellingprice: 14400<br />MMRError:  0.021276596<br />body: Sedan<br />make: Nissan<br />color: white","year: 2014<br />sellingprice: 12750<br />MMRError:  0.020000000<br />body: Sedan<br />make: Nissan<br />color: white","year: 2012<br />sellingprice: 13800<br />MMRError:  0.090909091<br />body: Sedan<br />make: Nissan<br />color: white","year: 2012<br />sellingprice: 11750<br />MMRError:  0.017316017<br />body: Sedan<br />make: Nissan<br />color: white"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(56,192,147,1)","opacity":0.79999999999999993,"size":[8.0945056364130714,8.0878352527436537,8.4503363622017051,8.0737930261847151],"symbol":[null,null,null,null],"line":{"width":1.8897637795275593,"color":"rgba(56,192,147,1)"}},"hoveron":"points","name":"(white,Sedan,Nissan)","legendgroup":"(white,Sedan,Nissan)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2013,2014],"y":[14000,16500],"text":["year: 2013<br />sellingprice: 14000<br />MMRError:  0.072796935<br />body: Sedan<br />make: Toyota<br />color: white","year: 2014<br />sellingprice: 16500<br />MMRError:  0.024844720<br />body: Sedan<br />make: Toyota<br />color: white"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(56,192,147,1)","opacity":0.96666666666666667,"size":[8.3592452578465455,8.1131203437307899],"symbol":[null,null],"line":{"width":1.8897637795275593,"color":"rgba(56,192,147,1)"}},"hoveron":"points","name":"(white,Sedan,Toyota)","legendgroup":"(white,Sedan,Toyota)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2014],"y":[18200],"text":"year: 2014<br />sellingprice: 18200<br />MMRError:  0.031161473<br />body: Mega Cab<br />make: Chrysler<br />color: white","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(56,192,147,1)","opacity":0.30000000000000004,"size":8.1459696935333294,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(56,192,147,1)"}},"hoveron":"points","name":"(white,Mega Cab,Chrysler)","legendgroup":"(white,Mega Cab,Chrysler)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2012,2014,2014],"y":[11100,12200,16300],"text":["year: 2012<br />sellingprice: 11100<br />MMRError: -0.086419753<br />body: Mega Cab<br />make: Dodge<br />color: white","year: 2014<br />sellingprice: 12200<br />MMRError: -0.237500000<br />body: Mega Cab<br />make: Dodge<br />color: white","year: 2014<br />sellingprice: 16300<br />MMRError:  0.031645570<br />body: Mega Cab<br />make: Dodge<br />color: white"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(56,192,147,1)","opacity":0.33333333333333337,"size":[7.5108712824464385,6.6052881369122272,8.1484816781408362],"symbol":[null,null,null],"line":{"width":1.8897637795275593,"color":"rgba(56,192,147,1)"}},"hoveron":"points","name":"(white,Mega Cab,Dodge)","legendgroup":"(white,Mega Cab,Dodge)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2012],"y":[24500],"text":"year: 2012<br />sellingprice: 24500<br />MMRError: -0.039215686<br />body: Regular Cab<br />make: Audi<br />color: white","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(56,192,147,1)","opacity":0.13333333333333333,"size":7.7721055752656723,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(56,192,147,1)"}},"hoveron":"points","name":"(white,Regular Cab,Audi)","legendgroup":"(white,Regular Cab,Audi)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2012,2006],"y":[8000,5600],"text":["year: 2012<br />sellingprice:  8000<br />MMRError: -0.130434783<br />body: Regular Cab<br />make: Chevrolet<br />color: white","year: 2006<br />sellingprice:  5600<br />MMRError:  0.325443787<br />body: Regular Cab<br />make: Chevrolet<br />color: white"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(56,192,147,1)","opacity":0.26666666666666666,"size":[7.2587760498121821,9.5514312990474437],"symbol":[null,null],"line":{"width":1.8897637795275593,"color":"rgba(56,192,147,1)"}},"hoveron":"points","name":"(white,Regular Cab,Chevrolet)","legendgroup":"(white,Regular Cab,Chevrolet)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2012],"y":[14000],"text":"year: 2012<br />sellingprice: 14000<br />MMRError:  0.102362205<br />body: Regular Cab<br />make: Honda<br />color: white","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(56,192,147,1)","opacity":0.43333333333333335,"size":8.5074316759454547,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(56,192,147,1)"}},"hoveron":"points","name":"(white,Regular Cab,Honda)","legendgroup":"(white,Regular Cab,Honda)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2011,2012],"y":[15000,23700],"text":["year: 2011<br />sellingprice: 15000<br />MMRError:  0.219512195<br />body: Supercab<br />make: Ford<br />color: white","year: 2012<br />sellingprice: 23700<br />MMRError:  0.030434783<br />body: Supercab<br />make: Ford<br />color: white"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(56,192,147,1)","opacity":0.3666666666666667,"size":[9.0707391683839891,8.1421974234515844],"symbol":[null,null],"line":{"width":1.8897637795275593,"color":"rgba(56,192,147,1)"}},"hoveron":"points","name":"(white,Supercab,Ford)","legendgroup":"(white,Supercab,Ford)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2008,2014],"y":[17800,49250],"text":["year: 2008<br />sellingprice: 17800<br />MMRError:  0.062686567<br />body: SuperCrew<br />make: BMW<br />color: white","year: 2014<br />sellingprice: 49250<br />MMRError: -0.039961014<br />body: SuperCrew<br />make: BMW<br />color: white"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(56,192,147,1)","opacity":0.16666666666666669,"size":[8.307961053948306,7.7680494185473954],"symbol":[null,null],"line":{"width":1.8897637795275593,"color":"rgba(56,192,147,1)"}},"hoveron":"points","name":"(white,SuperCrew,BMW)","legendgroup":"(white,SuperCrew,BMW)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2013,2013],"y":[25300,19700],"text":["year: 2013<br />sellingprice: 25300<br />MMRError:  0.020161290<br />body: SuperCrew<br />make: Ford<br />color: white","year: 2013<br />sellingprice: 19700<br />MMRError: -0.043689320<br />body: SuperCrew<br />make: Ford<br />color: white"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(56,192,147,1)","opacity":0.3666666666666667,"size":[8.0886783212883699,7.747727512136013],"symbol":[null,null],"line":{"width":1.8897637795275593,"color":"rgba(56,192,147,1)"}},"hoveron":"points","name":"(white,SuperCrew,Ford)","legendgroup":"(white,SuperCrew,Ford)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2013],"y":[20000],"text":"year: 2013<br />sellingprice: 20000<br />MMRError: -0.014778325<br />body: SuperCrew<br />make: Toyota<br />color: white","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(56,192,147,1)","opacity":0.96666666666666667,"size":7.9039380620693871,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(56,192,147,1)"}},"hoveron":"points","name":"(white,SuperCrew,Toyota)","legendgroup":"(white,SuperCrew,Toyota)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2015,2013],"y":[42000,32800],"text":["year: 2015<br />sellingprice: 42000<br />MMRError:  0.002386635<br />body: SUV<br />make: Chevrolet<br />color: white","year: 2013<br />sellingprice: 32800<br />MMRError: -0.017964072<br />body: SUV<br />make: Chevrolet<br />color: white"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(56,192,147,1)","opacity":0.26666666666666666,"size":[7.9952323071765861,7.8868773955214113],"symbol":[null,null],"line":{"width":1.8897637795275593,"color":"rgba(56,192,147,1)"}},"hoveron":"points","name":"(white,SUV,Chevrolet)","legendgroup":"(white,SUV,Chevrolet)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2013],"y":[21700],"text":"year: 2013<br />sellingprice: 21700<br />MMRError: -0.022522523<br />body: SUV<br />make: Dodge<br />color: white","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(56,192,147,1)","opacity":0.33333333333333337,"size":7.8624007768947424,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(56,192,147,1)"}},"hoveron":"points","name":"(white,SUV,Dodge)","legendgroup":"(white,SUV,Dodge)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2013],"y":[20000],"text":"year: 2013<br />sellingprice: 20000<br />MMRError:  0.123595506<br />body: SUV<br />make: Ford<br />color: white","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(56,192,147,1)","opacity":0.3666666666666667,"size":8.6122768227792879,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(56,192,147,1)"}},"hoveron":"points","name":"(white,SUV,Ford)","legendgroup":"(white,SUV,Ford)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2008],"y":[6500],"text":"year: 2008<br />sellingprice:  6500<br />MMRError:  0.256038647<br />body: SUV<br />make: Honda<br />color: white","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(56,192,147,1)","opacity":0.43333333333333335,"size":9.2393244373894152,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(56,192,147,1)"}},"hoveron":"points","name":"(white,SUV,Honda)","legendgroup":"(white,SUV,Honda)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2006,2005],"y":[8000,11800],"text":["year: 2006<br />sellingprice:  8000<br />MMRError:  0.300813008<br />body: SUV<br />make: Infiniti<br />color: white","year: 2005<br />sellingprice: 11800<br />MMRError:  0.245382586<br />body: SUV<br />make: Infiniti<br />color: white"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(56,192,147,1)","opacity":0.5,"size":[9.4418553477967482,9.190462949661848],"symbol":[null,null],"line":{"width":1.8897637795275593,"color":"rgba(56,192,147,1)"}},"hoveron":"points","name":"(white,SUV,Infiniti)","legendgroup":"(white,SUV,Infiniti)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2011],"y":[12000],"text":"year: 2011<br />sellingprice: 12000<br />MMRError: -0.051383399<br />body: SUV<br />make: Kia<br />color: white","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(56,192,147,1)","opacity":0.56666666666666665,"size":7.7056190856272009,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(56,192,147,1)"}},"hoveron":"points","name":"(white,SUV,Kia)","legendgroup":"(white,SUV,Kia)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2008],"y":[8300],"text":"year: 2008<br />sellingprice:  8300<br />MMRError:  0.164912281<br />body: SUV<br />make: Nissan<br />color: white","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(56,192,147,1)","opacity":0.79999999999999993,"size":8.8126998659335634,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(56,192,147,1)"}},"hoveron":"points","name":"(white,SUV,Nissan)","legendgroup":"(white,SUV,Nissan)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2014],"y":[20300],"text":"year: 2014<br />sellingprice: 20300<br />MMRError: -0.014563107<br />body: Sport Wagon<br />make: GMC<br />color: white","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(56,192,147,1)","opacity":0.40000000000000002,"size":7.9050892891584814,"symbol":null,"line":{"width":1.8897637795275593,"color":"rgba(56,192,147,1)"}},"hoveron":"points","name":"(white,Sport Wagon,GMC)","legendgroup":"(white,Sport Wagon,GMC)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2012],"y":[18300],"text":"year: 2012<br />sellingprice: 18300<br />MMRError: -0.046875000<br />body: Convertible<br />make: Lexus<br />color: yellow","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(173,216,230,1)","opacity":0.59999999999999998,"size":7.7303207730593382,"symbol":"triangle-up","line":{"width":1.8897637795275593,"color":"rgba(173,216,230,1)"}},"hoveron":"points","name":"(yellow,Convertible,Lexus)","legendgroup":"(yellow,Convertible,Lexus)","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":45.406392694063925,"r":7.3059360730593621,"b":41.82648401826485,"l":54.794520547945211},"plot_bgcolor":"rgba(127,127,127,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724},"title":{"text":"Car Sampler - Hover over a Car to See It's Info (ignore guides)","font":{"color":"rgba(0,0,0,1)","family":"","size":17.534246575342465},"x":0,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[1994,2016],"tickmode":"array","ticktext":["1995","2000","2005","2010","2015"],"tickvals":[1995,2000,2005,2010,2015],"categoryorder":"array","categoryarray":["1995","2000","2005","2010","2015"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.6529680365296811,"tickwidth":0.33208800332088001,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716894984},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(107,107,107,1)","gridwidth":0.33208800332088001,"zeroline":false,"anchor":"y","title":{"text":"Production Year","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-2550,59050],"tickmode":"array","ticktext":["0","20000","40000"],"tickvals":[0,20000,40000],"categoryorder":"array","categoryarray":["0","20000","40000"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.6529680365296811,"tickwidth":0.33208800332088001,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(107,107,107,1)","gridwidth":0.33208800332088001,"zeroline":false,"anchor":"x","title":{"text":"Selling Price","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.8897637795275593,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716894984},"title":{"text":"body<br />make<br />MMRError<br />color","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"61a04c447849":{"x":{},"y":{},"size":{},"shape":{},"alpha":{},"colour":{},"type":"scatter"}},"cur_data":"61a04c447849","visdat":{"61a04c447849":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+<p>NOTE: I tried to make the guides go away on this one and couldn’t get it to work. Also the manual color scale didn’t line up properly when I used my accurate color scale from earlier for some reason.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<!--radix_placeholder_article_footer-->
+<!--/radix_placeholder_article_footer-->
+</div>
+
+<div class="d-appendix">
+</div>
+
+
+<!--radix_placeholder_site_after_body-->
+<!--/radix_placeholder_site_after_body-->
+<!--radix_placeholder_appendices-->
+<div class="appendix-bottom"></div>
+<!--/radix_placeholder_appendices-->
+<!--radix_placeholder_navigation_after_body-->
+<!--/radix_placeholder_navigation_after_body-->
+
+</body>
+
+</html>

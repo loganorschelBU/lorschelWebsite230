@@ -1,0 +1,67 @@
+{
+  "articles": [
+    {
+      "path": "genArt.html",
+      "title": "Generative Art",
+      "description": "A collection of some generative art pieces I created using R with the aRtsy and GGPlot2 extensions",
+      "author": [],
+      "contents": "\r\n\r\n\r\n\r\nBucknell Themed Piece\r\n\r\n\r\n\r\n\r\n“The Slinky”\r\n\r\n\r\n\r\n\r\n“Space Elevator”\r\n\r\n\r\n\r\n\r\n",
+      "last_modified": "2024-05-05T14:50:31-04:00"
+    },
+    {
+      "path": "HERS.html",
+      "title": "Heart and Estrogen/Progesterone Study Visualizations",
+      "description": "A collection of visualizations based on the HERS study (from MATH230 Exam 2)",
+      "author": [],
+      "contents": "\r\n\r\n\r\n\r\nThis dataset includes data from the Heart and Estrogen/Progestin Study (HERS), a clinical trial of hormone therapy for prevention of recurrent heart attacks and deaths among 2,763 post-menopausal women with existing coronary heart disease.\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
+      "last_modified": "2024-05-05T14:50:34-04:00"
+    },
+    {
+      "path": "hsb2.html",
+      "title": "High School and Beyond Survey Visualizations",
+      "description": "A collection of visualizations based on the HS&B survey (from MATH230 Exam 1)",
+      "author": [],
+      "contents": "\r\n\r\n\r\n\r\nThis dataset includes demographical and testing information about high school seniors. Below are a series of visualizations meant to explain this data.\r\nCumulative Test Score Distribution\r\nThis boxplot shows the distribution of cumulative test scores for all students.\r\n\r\n\r\n\r\nWriting Score Distribution by School Type\r\nThis visualization uses an overlay of violin and boxplots to show the distribution of writing test scores based on type of school.\r\n\r\n\r\n\r\nTest Score Quartile by Race\r\nThis stacked bar chart shows a breakdown of each race group by which quartile they fall in based on their cumulative test score.\r\n\r\n\r\n\r\nReading Scores vs Writing Score\r\nThis scatterplot organized by color/shape shows the correlation between students reading and writing test scores.\r\n\r\n\r\n\r\nTest Score Distributions and Race\r\nUsing density cuvres, points and bars to show quartiles, this viz compares cumulative test scores by race.\r\n\r\n\r\n\r\nSocioeconomic Status Test scores by Subject\r\nThis chart uses different linetypes and point shapes to show how socioecenomic status effects test scores across all subjects.\r\n\r\n\r\n\r\nNOTE: Something seems to have not worked when copying this one, not sure why or how.\r\n\r\n\r\n\r\n",
+      "last_modified": "2024-05-05T14:50:36-04:00"
+    },
+    {
+      "path": "index.html",
+      "title": "Logan M. Orschel",
+      "author": [],
+      "contents": "\r\n\r\n          \r\n          \r\n          Math 230: Data Visualization and Computing\r\n          \r\n          \r\n          Home\r\n          \r\n          \r\n          Past Work\r\n           \r\n          ▾\r\n          \r\n          \r\n          Generative Art\r\n          Confidence Interval Lesson\r\n          HS&B Survey Visualizatons\r\n          HERS Study Visualizations\r\n          Miscillaneous\r\n          \r\n          \r\n          \r\n          \r\n          Math 230 Final Project\r\n           \r\n          ▾\r\n          \r\n          \r\n          Story Through Data\r\n          Infographic\r\n          \r\n          \r\n          ☰\r\n          \r\n          \r\n      \r\n        \r\n          \r\n            Logan M. Orschel\r\n          \r\n          \r\n            \r\n              Freshman Statistics student at Bucknell University\r\n            \r\n            \r\n              Freshman Statistics student at Bucknell University\r\n            \r\n          \r\n\r\n          \r\n            \r\n              \r\n                  \r\n                    \r\n                      LinkedIn\r\n                    \r\n                  \r\n                \r\n                                \r\n                  \r\n                    \r\n                      Email\r\n                    \r\n                  \r\n                \r\n                              \r\n          \r\n\r\n          \r\n            \r\n              \r\n                                \r\n                  \r\n                    LinkedIn\r\n                  \r\n                \r\n                                \r\n                  \r\n                    Email\r\n                  \r\n                \r\n                              \r\n            \r\n          \r\n        \r\n      \r\n    \r\n\r\n    \r\n    \r\n    ",
+      "last_modified": "2024-05-05T14:50:38-04:00"
+    },
+    {
+      "path": "Infographic.html",
+      "title": "Infographic",
+      "author": [],
+      "contents": "\r\nInofgraphic\r\n\r\n\r\n",
+      "last_modified": "2024-05-05T14:50:40-04:00"
+    },
+    {
+      "path": "misc.html",
+      "title": "Miscillaneous",
+      "description": "Some miscillaneous visualizations I have made",
+      "author": [],
+      "contents": "\r\n\r\n\r\n\r\nThis visualization was made as a demonstration of the ggalluvial extension for ggplot2.\r\n\r\n\r\n\r\nThis plot was created to show off custom color palette extensions for ggplot2.\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
+      "last_modified": "2024-05-05T14:50:43-04:00"
+    },
+    {
+      "path": "shiny.html",
+      "title": "Confidence Interval Lesson",
+      "description": "This interactive lesson, made in collaboration with Asa Friedrich and Devin Halliburton, is mean to help readers understand the statistical concept of confidence intervals.",
+      "author": [],
+      "contents": "\r\n\r\n\r\n\r\n\r\n\r\n",
+      "last_modified": "2024-05-05T14:50:44-04:00"
+    },
+    {
+      "path": "story.html",
+      "title": "Understanding Price",
+      "description": "An exploration of both new and used car sales in the United States",
+      "author": [],
+      "contents": "\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nUnderstanding Price\r\nA Car Price Guide for First Time Buyers\r\nWhen purchasing, or planning to purchase a new vehicle, it can be very important to understand what price you can expect based on what you want.\r\nThis guide will explain how the price of cars is affected by a number of potential variables, including:\r\nPrior Use\r\nPrice\r\nManufacturer\r\nColor\r\nInterior Color\r\nBody Type\r\nSuggested price (MMR)\r\nTo start, let’s address a few intuitive facts about car buying that basically explain themselves and don’t require extensive explanation:\r\nMost cars depreciate in value as they age, being at their peak at the year of their manufacture\r\nThis effect is exacerbated by how much the car is used, meaning an unused car, even one manufactured several years ago, will generally have a greater value than a used car manufactured in the same year (I will explain this in more detail later).\r\nThis guide uses data from 2014-2015 about dealership sales of both new and old cars in North America. While the below visualizations may not accurately represent modern prices, the relationships shown remain largely consistent.\r\nWith that out of the way, below are some visualizations explaining how price is affected by a number of different variables. Some explanation is given for each, but it’s a good idea to consider what you are looking for and what you are able to pay for, comparing those to each graph shown.\r\nBody Type\r\nWhen purchasing a vehicle, one of the first things you should think about is the type of car you want. Sedan? Hatchback? Truck? If a truck, what kind of cab? The visualization below shows the price distribution of each body type. Note that there are many outlier points above the y-axis upper bound shown.\r\n\r\n\r\n\r\nManufacturer\r\nWhile you may have your heart set on a certain manufacturer, keep in mind that price distribution varies significantly from one to another, and some manufacturers are generally considered more expensive than others. The graph below provides an understanding of the price distribution available for essentially all the top car manufacturers.\r\n\r\n\r\n\r\nCondition\r\nThe below graph shows the relationship between how many miles the car has traveled in it’s lifetime and its sale price. The sample was derived from a collection of used and new cars.\r\n\r\n\r\n\r\nSuggested Price\r\nThe MMR is a price index used to estimate the value of a car based on several factors. Generally, cars are sold for around their suggested price, although there can be deviation for several factors, including manufacturer. For the sake of examination, this graph includes the manufacturer of each car to show their deviation.\r\n\r\n\r\n\r\nColor\r\nWhile not always that important, some car colors tend to be consistently more expensive than others. This visualizations shows the sale price distributions of cars based on their color.\r\n\r\n\r\n\r\nTransmission\r\nWhen purchasing a vehicle it is important to know whether you want an automatic or manual, especially considering your driving ability. The distributions below show what you can expect from prices from each.\r\n\r\n\r\n\r\nNotice how median price for a manual is a bit lower? This is likely due to an greater number of the manuals being sold and being older, due to their share of vehicle production decreasing over the years. Below is a second visualization showing this trend in more detail across different production years.\r\n\r\n\r\n\r\nInterior Color\r\nInterior color and upholstery can have a significant effect on price. The visualization below shows price distribution based on interior color.\r\n\r\n\r\n\r\nColor Breakdown\r\nEver wondered if you’ll be able to find the interior color you want with the exterior color you want? The graph below shows the proportional breakdown of each exterior color. This way you can examine the likelihood you’ll be able to find a car you want.\r\n\r\n\r\n\r\nFinal Summary\r\nThe plot below allows you to compare exact cars to each other to get an idea for how different factors play into a vehicle’s final price.\r\n\r\n\r\n\r\nNOTE: I tried to make the guides go away on this one and couldn’t get it to work. Also the manual color scale didn’t line up properly when I used my accurate color scale from earlier for some reason.\r\n\r\n\r\n\r\n",
+      "last_modified": "2024-05-05T14:51:12-04:00"
+    }
+  ],
+  "collections": []
+}

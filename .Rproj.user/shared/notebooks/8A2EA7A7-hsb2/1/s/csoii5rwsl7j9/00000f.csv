@@ -1,0 +1,7 @@
+"0","ggplot(hsb2, aes(x=schtyp,y=write))+"
+"0","  geom_violin(aes(fill=schtyp),alpha=0.5)+"
+"0","  guides(fill=""none"")+"
+"0","  xlab(""School Type"")+"
+"0","  ylab(""Writing Scores"")+"
+"0","  ggtitle(""Distribution of writing scores by school type"")+"
+"0","  geom_boxplot(width=0.25,aes(fill=schtyp))"

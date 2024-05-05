@@ -1,0 +1,4 @@
+"0","ggplot(hsb2,aes(x=total_score))+"
+"0","  geom_boxplot(width=0.5,fill=""steelblue"")+"
+"0","  xlab(""Cumulative Score Across All Subjects"")+"
+"0","  ggtitle(""Distribution of Cumulative Subject Scores"")"

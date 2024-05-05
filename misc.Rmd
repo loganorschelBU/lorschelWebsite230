@@ -1,0 +1,40 @@
+---
+title: "Miscillaneous"
+description: |
+  Some miscillaneous visualizations I have made
+---
+```{r,echo=FALSE}
+library(ggplot2)
+library(ggalluvial)
+library(Lock5Data)
+data.sub = SleepStudy[complete.cases(SleepStudy), ]
+library(MASS)
+data(survey)
+survey.sub = survey[complete.cases(survey), ]
+rm(survey)
+library(wesanderson)
+```
+
+This visualization was made as a demonstration of the ggalluvial extension for ggplot2.
+
+```{r,echo=FALSE}
+ggplot(data.sub, aes(axis1 = AlcoholUse, axis2 = DepressionStatus, axis3 = AnxietyStatus)) +
+  scale_x_discrete(limits = c("Alcohol Use", "Depression Status", "Anxiety Status"), expand=c(.1,.05)) + 
+  ylab("Count")+
+  geom_alluvium(aes(fill=AlcoholUse)) +
+  geom_stratum() + 
+  geom_text(stat = "stratum", aes(label = after_stat(stratum))) +
+  theme_linedraw() + 
+  ggtitle("Relation of Alcohol Consumption to Anxiety and Depression Levels")+
+  guides(fill="none")
+```
+
+This plot was created to show off custom color palette extensions for ggplot2.
+
+```{r,echo=FALSE}
+ggplot(survey.sub, aes(x=Pulse,y=Height,color=Smoke,shape=Exer))+
+  geom_point(alpha=0.5,size=3)+
+  scale_color_manual(values=wes_palette("GrandBudapest1"))+
+  ggtitle("Pulse Rate by Demographic")
+```
+

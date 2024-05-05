@@ -1,0 +1,252 @@
+---
+title: "Understanding Price"
+description: |
+  An exploration of both new and used car sales in the United States
+---.
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+```{r,echo=FALSE}
+cardata=read.csv("car_prices.csv",header=TRUE,na.strings=c("","NA"))
+```
+
+```{r,echo=FALSE}
+cardata$make=factor(cardata$make)
+levels(cardata$make)=c("Acura","Acura","Airstream","Aston Martin","Audi","Audi", "Bentley","BMW", "BMW","Buick","Buick", "Cadillac", "Cadillac", "Chevrolet", "Chevrolet","Chevrolet","Chrysler","Chrysler", "Daewoo","Dodge","Dodge","Dodge", "dot","Ferrari","Fiat","Fisker","Ford","Ford","Ford","Ford","Geo","GMC","GMC","GMC", "Honda","Honda","Hummer","Hyundai","Hyundai","Hyundai","Infiniti","Isuzu","Jaguar","Jeep", "Jeep","Kia","Kia","Lamborghini","Land Rover","Land Rover","Land Rover","Lexus","Lexus","Lincoln","Lincoln","Lotus","Maserati","Maserati","Mazda","Mazda", "Mazda","Mercedes-Benz","Mercedes-Benz","Mercedes-Benz","Mercury","Mercury","Mini", "Mitsubishi","Mitsubishi","Nissan","Nissan","Oldsmobile","Oldsmobile","Plymouth","Plymouth", "Pontiac","Pontiac","Porsche","Porsche","Dodge","Rolls-Royce","Saab","Saturn","Scion","Smart","Subaru","Subaru","Suzuki","Suzuki","Tesla","Toyota","Toyota","Volkswagen","Volkswagen","Volvo","Volkswagen")
+#table(cardata$make)
+```
+
+```{r,echo=FALSE}
+cardata$state=factor(cardata$state)
+levels(cardata$state)=c(NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,"AB","AL","AZ","CA","CO","FL","GA","HI","IL","IN","LA","MA","MD","MI","MN","MO", "MS","NC","NE","NJ","NM","NS","NV","NY","OH","OK","ON","OR","PA","PR", "QC", "SC","TN","TX","UT","VA","WA","WI")
+#table(cardata$state)
+```
+
+```{r,echo=FALSE}
+cardata$color=factor(cardata$color)
+levels(cardata$color)=c(NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,"beige","black","blue","brown","burgundy","charcoal","gold","gray","green","lime","off-white","orange","pink","purple","red","silver","turquoise","white","yellow")
+#table(cardata$color)
+```
+
+```{r,echo=FALSE}
+cardata$transmission=factor(cardata$transmission)
+levels(cardata$transmission)=c("automatic","manual",NA,NA)
+#table(cardata$transmission)
+```
+
+```{r,echo=FALSE}
+cardata$body=factor(cardata$body)
+levels(cardata$body)=c("Access Cab","Access Cab","Beetle Convertible","Beetle Convertible","Cab Plus","Cab Plus","Cab Plus","Club Cab","Club Cab","Convertible","Convertible","Coupe","Coupe","Crew Cab","Crew Cab","Crewmax Cab","Crewmax Cab","Coupe","Coupe","Wagon","Coupe","Coupe","Wagon","Wagon","Double Cab","Double Cab","Van","Van","Coupe","Coupe","Ext Cab","Ext Cab","Ext Cab","Convertible","Convertible","Coupe","Coupe","Coupe","Sedan","Sedan","Convertible","Convertible","Coupe","Coupe","Coupe","Coupe","Convertible","Convertible","Hatchback","Hatchback","King Cab","King Cab","Coupe","Coupe","Mega Cab","Mega Cab","Minivan","Minivan","Navigation","Van","Van","Convertible","Convertible","Coupe","Coupe","Quad Cab","Van","Regular Cab","Regular Cab","Regular Cab","Sedan","Sedan","Supercab","Supercab","SuperCrew","SuperCrew","SUV","SUV","Van","Van","Sport Wagon","Sport Wagon","Van","Van","Wagon","Wagon","Ext Cab","Ext Cab")
+#table(cardata$body)
+```
+
+```{r}
+cardata$interior=factor(cardata$interior)
+levels(cardata$interior)=c(NA,"beige","black","blue","brown","burgundy","gold","gray","green","off-white","orange","purple","red","silver","tan","white","yellow")
+#table(cardata$interior)
+```
+
+```{r}
+cardata=cardata[complete.cases(cardata),]
+library(ggplot2)
+library(hexbin)
+```
+
+## Understanding Price
+# A Car Price Guide for First Time Buyers
+
+When purchasing, or planning to purchase a new vehicle, it can be very important to understand what price you can expect based on what you want.
+This guide will explain how the price of cars is affected by a number of potential variables, including:
+
+* Prior Use
+* Price
+* Manufacturer
+* Color
+* Interior Color
+* Body Type
+* Suggested price (MMR)
+
+To start, let's address a few intuitive facts about car buying that basically explain themselves and don't require extensive explanation:
+
+* Most cars depreciate in value as they age, being at their peak at the year of their manufacture
+* This effect is exacerbated by how much the car is used, meaning an unused car, even one manufactured several years ago, will generally have a greater value than a used car manufactured in the same year (I will explain this in more detail later).
+
+This guide uses data from 2014-2015 about dealership sales of both new and old cars in North America. While the below visualizations may not accurately represent modern prices, the relationships shown remain largely consistent.
+
+With that out of the way, below are some visualizations explaining how price is affected by a number of different variables. Some explanation is given for each, but it's a good idea to consider what you are looking for and what you are able to pay for, comparing those to each graph shown.
+
+### Body Type
+When purchasing a vehicle, one of the first things you should think about is the type of car you want. Sedan? Hatchback? Truck? If a truck, what kind of cab? The visualization below shows the price distribution of each body type. Note that there are many outlier points above the y-axis upper bound shown.
+
+```{r}
+marine=rep(c("steelblue3","turquoise","steelblue1","#38C093","lightblue","#30FFBA","blue3","#3A4C9B","#707BAA"),8)
+ggplot(cardata,aes(x=body,y=sellingprice,fill=body))+
+  geom_boxplot()+
+  theme_dark()+
+  ggtitle("Sale Price Distribution by Body Price")+
+  xlab("Body Type")+
+  ylab("Sale Price")+
+  scale_fill_manual(values=marine)+
+  guides(fill="none")+
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.3, hjust=1))+
+  scale_y_continuous(limits=c(0,50000))
+
+```
+### Manufacturer
+While you may have your heart set on a certain manufacturer, keep in mind that price distribution varies significantly from one to another, and some manufacturers are generally considered more expensive than others. The graph below provides an understanding of the price distribution available for essentially all the top car manufacturers.
+
+```{r}
+ggplot(cardata,aes(x=make,y=sellingprice,fill=make))+
+  geom_boxplot()+
+  theme_dark()+
+  scale_fill_manual(values=marine)+
+  xlab("Manufacturer")+
+  ylab("Sale Price")+
+  guides(fill="none")+
+  ggtitle("Sale Price Distribution by Manufacturer")+
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.3, hjust=1))+
+  scale_y_continuous(limits=c(0,175000))
+```
+
+### Condition
+The below graph shows the relationship between how many miles the car has traveled in it's lifetime and its sale price. The sample was derived from a collection of used and new cars.
+
+```{r}
+set.seed(1112)
+sub1=cardata[sample(1:nrow(cardata),2000),]
+ggplot(sub1,aes(x=odometer,y=sellingprice))+
+  geom_point(color="turquoise",alpha=0.7)+
+  scale_y_continuous(limits=c(0,75000),labels = scales::comma)+
+  theme_dark()+
+  ggtitle("Odometer Mileage vs Sale Price Based on Sample of 2000")+
+  ylab("Sale Price")+
+  xlab("Odometer Mileage")+
+  scale_x_continuous(labels = scales::comma)+
+  geom_smooth(method="loess",se=TRUE,color="steelblue1")
+```
+### Suggested Price
+The MMR is a price index used to estimate the value of a car based on several factors. Generally, cars are sold for around their suggested price, although there can be deviation for several factors, including manufacturer. For the sake of examination, this graph includes the manufacturer of each car to show their deviation.
+
+```{r}
+sub2=cardata[cardata$make=="Chevrolet"|cardata$make=="Ford"|cardata$make=="Honda"|cardata$make=="Lincoln"|cardata$make=="Mercedes-Benz",]
+ggplot(sub2,aes(x=mmr,y=sellingprice,color=make))+
+  geom_point()+
+  ggtitle("Sale Price vs MMR Price")+
+  geom_smooth(method=lm,se=FALSE,color="#30FFBA")+
+  xlab("MMR Price")+
+  ylab("Sale Price")+
+  scale_y_continuous(limits=c(0,200000),labels = scales::comma)+
+  scale_x_continuous(labels=scales::comma)+
+  scale_color_manual(values=marine,name="Manufacturer")+
+  theme_dark()
+```
+### Color
+While not always that important, some car colors tend to be consistently more expensive than others. This visualizations shows the sale price distributions of cars based on their color.
+
+```{r}
+ggplot(cardata,aes(x=sellingprice,y=color,fill=color))+
+  geom_boxplot()+
+  guides(fill="none")+
+    scale_x_continuous(limits=c(0,35000))+
+  ggtitle("Sale Price Distribution by Color")+
+  scale_fill_manual(
+  values=c("beige","black","blue","brown","#751310","#565555","gold","gray","limegreen","green","#F3FFD5",
+           "orange","pink","purple","red","gray","turquoise","white","yellow"))+
+  theme_dark()+
+  ylab("Vehicle Color")+
+  xlab("Sale Price")
+```
+### Transmission
+When purchasing a vehicle it is important to know whether you want an automatic or manual, especially considering your driving ability. The distributions below show what you can expect from prices from each.
+
+```{r}
+ggplot(cardata,aes(x=transmission,y=sellingprice,fill=transmission))+
+  geom_violin(alpha=0.5)+
+  geom_boxplot(alpha=0.5,width=0.3)+
+  scale_y_continuous(limits=c(0,50000))+
+  guides(fill="none")+
+  ggtitle("Distribution of Selling Price based on Transmission Type")+
+  xlab("Transmission Type")+
+  ylab("Sale Price")+
+  theme_dark()+
+  scale_fill_manual(values=marine)
+```
+Notice how median price for a manual is a bit lower? This is likely due to an greater number of the manuals being sold and being older, due to their share of vehicle production decreasing over the years. Below is a second visualization showing this trend in more detail across different production years.
+
+```{r}
+sub3=cardata[cardata$year==2000|cardata$year==2005|cardata$year==2010|cardata$year==2015,]
+sub3$year=factor(sub3$year)
+ggplot(sub3,aes(x=year,y=sellingprice,fill=transmission))+
+  geom_boxplot(position="dodge")+
+  theme_dark()+
+  scale_fill_manual(values=marine)+
+  ggtitle("Transmission Type Sale Price Range by Production year")+
+  xlab("Production Year")+
+  ylab("Sale Price")+
+  scale_y_continuous(limits=c(0,75000))
+```
+
+
+### Interior Color
+Interior color and upholstery can have a significant effect on price. The visualization below shows price distribution based on interior color.
+
+```{r}
+ggplot(cardata,aes(x=sellingprice,y=interior,fill=interior))+
+  geom_violin(width=1.5)+
+  guides(fill="none")+
+  ggtitle("Sale Price Distribution by Interior/Upholstery Color")+
+  scale_fill_manual(
+  values=c("beige","black","blue","brown","#751310","gold","gray","limegreen","#F3FFD5",
+           "orange","purple","red","gray","tan","white","yellow"))+
+  theme_dark()+
+  ylab("Vehicle Color")+
+  xlab("Sale Price")+
+  scale_x_continuous(limits=c(0,75000))
+```
+### Color Breakdown
+Ever wondered if you'll be able to find the interior color you want with the exterior color you want? The graph below shows the proportional breakdown of each exterior color. This way you can examine the likelihood you'll be able to find a car you want.
+
+```{r}
+ggplot(cardata,aes(x=color,fill=interior))+
+  geom_bar(position="fill")+
+  scale_fill_manual(
+  values=c("beige","black","blue","brown","#751310","gold","gray","limegreen","#F3FFD5",
+           "orange","purple","red","gray","tan","white","yellow"))+
+  theme_dark()+
+  xlab("Exterior Color")+
+  ylab("Relative Frequency of Interior Color")+
+  ggtitle("Color Breakdown")+
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.3, hjust=1))
+```
+
+
+### Final Summary
+The plot below allows you to compare exact cars to each other to get an idea for how different factors play into a vehicle's final price.
+
+```{r}
+set.seed(98324)
+library(plotly)
+library(dplyr)
+library(gapminder)
+sub4=cardata[sample(1:nrow(cardata),250),]
+sub4$MMRError=(sub4$sellingprice-sub4$mmr)/sub4$mmr
+
+p <- sub4 %>%
+      arrange(desc(color)) %>%
+      ggplot(aes(x=year,y=sellingprice,size=MMRError,shape=body,alpha=make)) +
+        geom_point(aes(color=color)) +
+        theme_dark()+
+        scale_color_manual(
+        values=marine)+
+        scale_size(range = c(.01, 3))+
+        guides(fill="none")+
+        xlab("Production Year")+
+        ylab("Selling Price")+
+        ggtitle("Car Sampler - Hover over a Car to See It's Info (ignore guides)")
+
+ggplotly(p)
+```
+NOTE: I tried to make the guides go away on this one and couldn't get it to work. Also the manual color scale didn't line up properly when I used my accurate color scale from earlier for some reason.

@@ -1,0 +1,5 @@
+---
+title: "Infographic"
+description: |
+---
+![Infographic](infographic.png)

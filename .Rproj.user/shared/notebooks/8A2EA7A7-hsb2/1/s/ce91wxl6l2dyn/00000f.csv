@@ -1,0 +1,7 @@
+"0","ggplot(hsb2, aes(x=race,fill=cut_total_score))+"
+"0","  geom_bar(position=""fill"")+"
+"0","  xlab(""Student's Race"")+"
+"0","  ylab(""Proportion of Students by Score Quartile"")+"
+"0","  guides(title=""Score Quartile"")+"
+"0","  scale_color_discrete(""Cumulative Score Quartile"")+"
+"0","  ggtitle(""Proportion of Cumulative Test Score Quartile by Race"")"

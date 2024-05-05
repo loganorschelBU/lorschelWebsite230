@@ -1,0 +1,14 @@
+---
+site: distill::distill_website
+title: "Logan M. Orschel"
+image: "IMG_7329.jpg"
+links:
+  - label: LinkedIn
+    url: "https://www.linkedin.com/in/logan-orschel-b373262b2/"
+  - label: Email
+    url: "lmo012@bucknell.edu"
+output:
+  postcards::jolla
+---
+ 
+Freshman Statistics student at Bucknell University

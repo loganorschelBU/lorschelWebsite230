@@ -1,0 +1,5 @@
+"0","ggplot(hsb2, aes(x=read,y=write))+"
+"0","  geom_point(aes(color=gender,shape=gender))+"
+"0","  xlab(""Reading Score"")+"
+"0","  ylab(""Writing Score"")+"
+"0","  ggtitle(""Comparing reading score and writing score"")"

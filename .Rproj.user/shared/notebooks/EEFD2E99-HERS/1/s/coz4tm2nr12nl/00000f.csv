@@ -1,0 +1,5 @@
+"0","heights=sqrt(weight/BMI)"
+"0","ggplot()+"
+"0","  geom_boxplot(aes(x=heights),fill=""lightblue"",alpha=0.7)+"
+"0","  xlab(""Height (m)"")+"
+"0","  ggtitle(""Heights of Subjects in an Estrogen/Progesterone Hormone Therapy Study"")"

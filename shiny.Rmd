@@ -1,0 +1,6 @@
+---
+title: "Confidence Interval Lesson"
+description: |
+  This interactive lesson, made in collaboration with Asa Friedrich and Devin Halliburton, is mean to help readers understand the statistical concept of confidence intervals.
+---
+<iframe src="https://abby-flynt.shinyapps.io/Asa-Devin-Logan-SP24/" class="l-screen-inset shaded" height="1000px"></iframe>

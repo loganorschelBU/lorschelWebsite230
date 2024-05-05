@@ -1,0 +1,47 @@
+---
+title: "Heart and Estrogen/Progesterone Study Visualizations"
+description: |
+  A collection of visualizations based on the HERS study (from MATH230 Exam 2)
+---
+```{r,echo=FALSE}
+hersdata.comp=read.csv("hersdata.csv")
+attach(hersdata.comp)
+library(ggplot2)
+```
+
+This dataset includes data from the Heart and Estrogen/Progestin Study (HERS), a clinical trial of hormone therapy for prevention of recurrent heart attacks and deaths among 2,763 post-menopausal women with existing coronary heart disease.
+
+```{r,echo=FALSE}
+heights=sqrt(weight/BMI)
+ggplot()+
+  geom_boxplot(aes(x=heights),fill="lightblue",alpha=0.7)+
+  xlab("Height (m)")+
+  ggtitle("Heights of Subjects in an Estrogen/Progesterone Hormone Therapy Study")
+```
+
+```{r,echo=FALSE}
+outlier_vals=function(x){
+  output=c(mean(x)-2*sd(x),mean(x)+2*sd(x))
+  output.names=c("low.val","high.val")
+  return(output)
+}
+gluoutliers=outlier_vals(glucose)
+ggplot()+
+  geom_histogram(aes(x=glucose))+
+  geom_vline(xintercept=gluoutliers[1])+
+  geom_vline(xintercept=gluoutliers[2])+
+  xlab("Fasting glucose (mg/dl)")+
+  ylab("Frequency")+
+  ggtitle("Distribution of Fasting Glucose Levels (values outside bars are outliers)")
+```
+
+```{r,echo=FALSE}
+ggplot(hersdata.comp[raceth!="White",],aes(x=tchol,y=BMI,fill=globrat,size=glucose))+
+  geom_point(shape=21,color="black",alpha=0.5)+
+  scale_size_continuous(name="Fasting Glucose (mg/dl)")+
+  scale_fill_brewer(palette="Set1",name="Health Rating")+
+  xlab("Total Cholesterol")+
+  ylab("BMI (kg/m^2)")+
+  ggtitle("Understanding the Health of Nonwhite Subjects")
+```
+

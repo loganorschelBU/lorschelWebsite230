@@ -1,0 +1,22 @@
+"0","hsb2=read.csv(""hsb2.csv"")"
+"0","hsb2$gender=factor(hsb2$gender)"
+"0","hsb2$race=factor(hsb2$race)"
+"0","hsb2$ses=factor(hsb2$ses,labels=c(""low"",""middle"",""high""))"
+"0","hsb2$total_score=hsb2$read+hsb2$write+hsb2$math+hsb2$science+hsb2$socst"
+"0","hsb2$cut_total_score=cut(hsb2$total_score,"
+"0","breaks=quantile(hsb2$total_score,probs=seq(0,1,0.25)),                                    labels=c(""first"",""second"",""third"",""fourth""))"
+"0","attach(hsb2)"
+"2","The following objects are masked from hsb2 (pos = 4):
+
+    cut_total_score, gender, id, math, prog, race, read, schtyp, science,
+    ses, socst, total_score, write, X
+
+"
+"2","The following objects are masked from hsb2 (pos = 5):
+
+    cut_total_score, gender, id, math, prog, race, read, schtyp, science,
+    ses, socst, total_score, write, X
+
+"
+"0","library(ggplot2)"
+"0","library(ggridges)"

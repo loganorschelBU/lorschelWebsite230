@@ -1,0 +1,29 @@
+name: "lorschelWebsite230"
+title: "Math 230: Data Visualization and Computing"
+theme: loTheme.css
+description: |
+
+output_dir: "docs"
+navbar:
+  right:
+    - text: "Home"
+      href: index.html
+    - text: "Past Work"
+      menu: 
+        - text: "Generative Art" 
+          href: genArt.html
+        - text: "Confidence Interval Lesson"
+          href: shiny.html
+        - text: "HS&B Survey Visualizatons"
+          href: hsb2.html
+        - text: "HERS Study Visualizations"
+          href: HERS.html
+        - text: "Miscillaneous"
+          href: misc.html
+    - text: "Math 230 Final Project"
+      menu:
+        - text: "Story Through Data"
+          href: story.html
+        - text: "Infographic"
+          href: Infographic.html
+output: distill::distill_article
